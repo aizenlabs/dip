@@ -151,7 +151,7 @@ class DP_Fondation_Topbar
       $node_html->find('li a', 0)->href = $node->url;
 
       // init dropdown
-      if( is_array($this->nodes[$node->id]) )
+      if( is_array($this->nodes[$node->id]) && $this->dropdown )
       {
         $node->classes[] = 'has-dropdown';
         $node_html->find('li', 0)->innertext .= "<ul class=\"dropdown nth-{$node->id}\"></ul>";

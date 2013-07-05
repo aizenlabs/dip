@@ -23,10 +23,10 @@ wp_register_script('foundation', $dip->theme->template_directory_uri.'/assets/js
 
 wp_enqueue_style('foundation');
 
-add_action('wp_footer', 'dp_load_scripts');
+add_action('wp_footer', 'foundation_load_scripts');
 wp_enqueue_script('foundation');
 
-function dp_load_scripts() { ?>
+function foundation_load_scripts() { ?>
 <script>
   document.write('<script src=<? echo $dip->theme->template_directory_uri ?>/assets/js/vendor/'
     + ('__proto__' in {} ? 'zepto' : 'jquery')

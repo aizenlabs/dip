@@ -41,11 +41,9 @@
     
     
   </header><!-- #head -->
-  
-  <? dp_topbar('dfgdgerg', array('dropdown' => true) ); ?>
-  
-<div class="row">
-  <? dp_topbar('menu', array('dropdown' => true, 'title'=>'Nome da bagaça') ); ?>
-</div>
+
+  <div class="row">
+    <? dp_topbar('menu', array('dropdown' => true, 'title'=>'Nome da bagaça') ); ?>
+  </div>
 
 </div>
