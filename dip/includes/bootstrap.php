@@ -9,6 +9,7 @@
 
 class DP_Bootstrap
 {
+  public $theme;
   public $config;
   public $modules;
   public $ui;
@@ -19,6 +20,12 @@ class DP_Bootstrap
 
     $this->config  = $loader['config'];
     $this->modules = $loader['modules']; 
+    
+    /** get all theme info */
+    $this->theme = wp_get_theme();
+    $this->theme->stylesheet_uri           = get_stylesheet_uri();
+    $this->theme->stylesheet_directory_uri = get_stylesheet_directory_uri();
+    $this->theme->template_directory_uri   = get_template_directory_uri();
 
     $this->_include_libs();
 
@@ -36,10 +43,14 @@ class DP_Bootstrap
   }
 
   protected function _load_scripts()
-  {
+  {var_dump($this->theme);
     if(is_admin() || is_login_page()) return;
-    wp_register_style('dip', get_stylesheet_uri(), false, '1.0.0');
-    wp_register_script('dip', get_bloginfo('template_url').'/script.js', false, '1.0.0', true);
+    wp_register_style('dip', $this->theme->stylesheet_uri, false, $this->theme->version);
+
+    if(is_child_theme() && file_exists($this->theme->stylesheet_directory_uri.'/script.js'))
+      wp_register_script('dip', $this->theme->stylesheet_directory_uri.'/script.js', false, $this->theme->version, true);
+    else
+      wp_register_script('dip', $this->theme->template_directory_uri.'/script.js', false, $this->theme->parent()->version, true);
 
     wp_enqueue_style('dip');
     wp_enqueue_script('dip');

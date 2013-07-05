@@ -111,9 +111,10 @@ class DP_Panel_Orbit extends DP_Panel
     
     public function enqueue_scripts()
     {
+      global $dip;
         wp_enqueue_style('thickbox');
         wp_enqueue_script('media-upload');
         
-        wp_enqueue_script( 'dip', get_bloginfo('template_directory') . '/assets/wp-admin.js', array( 'wp-color-picker' ), false, true );
+        wp_enqueue_script( 'dip', $dip->theme->template_directory_uri . '/assets/wp-admin.js', array( 'wp-color-picker' ), false, true );
     }
 }
