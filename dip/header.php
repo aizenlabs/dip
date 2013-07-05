@@ -31,19 +31,14 @@
 
 <body <?php body_class(); ?>>
 
-  <?php do_action( 'before' ); ?>
-
-  <header id="header" class="row" role="banner">
-    <hgroup class="large-12 small-12 columns">
+  <?php do_action('before'); ?>
+  
+  <header id="header" class="row">
+    <hgroup class="large-3 small-12 columns">
       <h1><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
       <h2 class="subheader"><?php bloginfo( 'description' ); ?></h2>
     </hgroup>
-    
-    
-  </header><!-- #head -->
-
-  <div class="row">
-    <? dp_topbar('menu', array('dropdown' => true, 'title'=>'Nome da bagaça') ); ?>
-  </div>
+    <?php dp_topbar('menu', array('dropdown' => true, 'attr' => array('class' => 'large-9 small-12 columns')) ); ?>
+  </header>
 
 </div>

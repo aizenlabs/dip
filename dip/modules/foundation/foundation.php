@@ -26,7 +26,8 @@ wp_enqueue_style('foundation');
 add_action('wp_footer', 'foundation_load_scripts');
 wp_enqueue_script('foundation');
 
-function foundation_load_scripts() { ?>
+function foundation_load_scripts() {
+  global $dip; ?>
 <script>
   document.write('<script src=<? echo $dip->theme->template_directory_uri ?>/assets/js/vendor/'
     + ('__proto__' in {} ? 'zepto' : 'jquery')

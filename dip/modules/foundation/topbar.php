@@ -106,7 +106,8 @@ class DP_Fondation_Topbar
     global $post;
 
     // open tag
-    $this->html = str_get_html('<nav class="top-bar"></nav>');
+    $classes = isset($this->attr['class']) ? ' ' . $this->attr['class'] : '';
+    $this->html = str_get_html("<nav class=\"top-bar{$classes}\"></nav>");
 
     // define navbar id
     if( !empty($this->attr['id']) )
@@ -130,7 +131,7 @@ class DP_Fondation_Topbar
       $this->html->find('nav', 0)->innertext .= $str;
 
       // reload parser
-      $this->html = str_get_html($this->html);        
+      $this->html = str_get_html($this->html);
       $this->html->find('section ul', 0)->class = 'nth-'.$this->depth;
 
       // recursive function
