@@ -14,7 +14,7 @@ require('breadcrumbs.php');
 require('orbit.php');
 require('topbar.php');
 
-if(is_admin() || is_login_page()) return; var_dump($dip->theme);
+if(is_admin() || is_login_page()) return;
 wp_register_style('normalize', $dip->theme->template_directory_uri.'/assets/css/normalize.css', false, '2.1.1');
 wp_register_style('foundation', $dip->theme->template_directory_uri.'/assets/css/foundation.css', array('normalize'), '4.2.3');
 

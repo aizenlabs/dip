@@ -43,7 +43,7 @@ class DP_Bootstrap
   }
 
   protected function _load_scripts()
-  {var_dump($this->theme);
+  {
     if(is_admin() || is_login_page()) return;
     wp_register_style('dip', $this->theme->stylesheet_uri, false, $this->theme->version);
 
