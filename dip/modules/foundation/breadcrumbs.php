@@ -13,11 +13,11 @@
  */
 function dp_breadcrumbs($menu)
 {
-  $obj = new DP_Helper_Breadcrumbs($menu);
+  $obj = new DP_Foundation_Breadcrumbs($menu);
   $obj->render();
 };
 
-class DP_Helper_Breadcrumbs
+class DP_Foundation_Breadcrumbs
 {
   private $menu_name;
   private $menu_items;

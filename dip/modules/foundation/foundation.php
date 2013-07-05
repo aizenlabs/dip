@@ -11,8 +11,9 @@
  
 require('breadcrumbs.php');
 require('orbit.php');
-require('navbar.php');
+require('topbar.php');
 
+if(is_admin() || is_login_page()) return;
 wp_register_style('normalize', get_bloginfo('template_url').'/assets/css/normalize.css', false, '2.1.1');
 wp_register_style('foundation', get_bloginfo('template_url').'/assets/css/foundation.css', array('normalize'), '4.2.3');
 

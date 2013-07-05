@@ -3,19 +3,21 @@
  * The helper for displaying Menus and Navbars
  *
  * @package Dip Framework
- * @subpackage Helper
+ * @subpackage Foundation Module
+ * @version 1.0.0
  * @since Dip Framework 1.0
  */
 
 // template functions
-function dp_navbar($_name, $_params = array())
+function dp_topbar($_name, $_params = array())
 {
-  $obj = new DP_Helper_Navbar($_name, $_params);
+  $obj = new DP_Fondation_Topbar($_name, $_params);
   $obj->render(); 
 }
 
-class DP_Helper_Navbar
+class DP_Fondation_Topbar
 {
+  private $title;
   private $menu_name;
   private $depth;
   private $root;
@@ -29,7 +31,7 @@ class DP_Helper_Navbar
   private $attr;
     
   /* @params( parent, root, dropdown, attr:array('name'=>'value') ) */
-  public function  __construct ($_menu, $_params = array())
+  public function  __construct ($_menu, $_params)
   {
     global $post;
 
@@ -39,12 +41,13 @@ class DP_Helper_Navbar
       $menu_obj = get_term($theme_locations[$_menu], 'nav_menu');
       $this->menu_name = $menu_obj->name;
     } else {
-      $this->menu_name = $menu;
+      $this->menu_name = $_menu;
     }
 
+    $this->title       = isset( $_params['title'] ) ? $_params['title'] : '';
     $this->depth       = isset( $_params['parent'] ) ? DP_Helper_Menu::get_item_id( $_params['parent'], $this->menu_name ) : 0;
     $this->root        = isset( $_params['root'] ) ? $_params['root'] : false;
-    $this->dropdown       = isset( $_params['dropdown'] ) ? $_params['dropdown'] : false;
+    $this->dropdown    = isset( $_params['dropdown'] ) ? $_params['dropdown'] : false;
 
     $this->self_url    = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     $this->parent_url  = $post->post_parent ? get_permalink( $post->post_parent ) : null;
@@ -112,16 +115,18 @@ class DP_Helper_Navbar
     // render content
     if ( empty( $this->nodes ) )
     {
-      $this->html->find('nav', 0)->innertext = "<ul><li><a href=\"\">Please, create the menu: <em>{$this->menu_name}</em></a></li></ul>";
+      if(!current_user_can('edit_theme_options')) return;
+      $this->html->find('nav', 0)->innertext = "<section class=\"top-bar-section\"><ul><li><a href=\"/wp-admin/nav-menus.php\">Hey, the menu is empty! Add something here!</a></li></ul></section>";
     }
     else
     {
       // add toglle buttom
-      $str = "<ul><li class=\"toggle-topbar\"><a href=\"#\"></a></li></ul>";
+      $name = !empty($this->title) ? "<h1><a href=\"#\">{$this->title}</a></h1>" : '';
+      $str = "<ul class=\"title-area\"><li class=\"name\">{$name}</li> <li class=\"toggle-topbar menu-icon\"><a href=\"\"><span>Menu</span></a></li></ul>";
       $this->html->find('nav', 0)->innertext = $str;
 
       // open section 
-      $str  = "<section><ul></ul></section>";
+      $str  = "<section class=\"top-bar-section\"><ul></ul></section>";
       $this->html->find('nav', 0)->innertext .= $str;
 
       // reload parser

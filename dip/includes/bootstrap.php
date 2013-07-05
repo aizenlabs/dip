@@ -37,6 +37,7 @@ class DP_Bootstrap
 
   protected function _load_scripts()
   {
+    if(is_admin() || is_login_page()) return;
     wp_register_style('dip', get_stylesheet_uri(), false, '1.0.0');
     wp_register_script('dip', get_bloginfo('template_url').'/script.js', false, '1.0.0', true);
 
@@ -85,4 +86,9 @@ class DP_Bootstrap
       }
     }
   }
+}
+
+// required template tags
+function is_login_page() {
+  return in_array($GLOBALS['pagenow'], array('wp-login.php', 'wp-register.php'));
 }

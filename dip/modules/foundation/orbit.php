@@ -12,17 +12,17 @@
 // template functions
 function dp_orbit($_id = null, $_params = array())
 {
-  $obj = new DP_Helper_Orbit($_id, $_params);
+  $obj = new DP_Foundation_Orbit($_id, $_params);
   $obj->render(); 
 }
 
-class DP_Helper_Orbit
+class DP_Foundation_Orbit
 {
   private $html;
   private $nodes;
   private $attr;
 
-  public function  __construct ( $_id = null, $_params = array() )
+  public function  __construct ($_id = null, $_params = array())
   {
     $option = get_option('orbit');
 
@@ -34,7 +34,7 @@ class DP_Helper_Orbit
 
   public function render()
   {
-      // open tag
+    // open tag
     $this->html = str_get_html('<div class="orbit"></div>');
 
     // define orbit id
@@ -55,10 +55,7 @@ class DP_Helper_Orbit
     echo $this->html;
   }
 }
-
-
-
-
+/** load panel only in wp-admin */
 if(!is_admin()) return;
 
 new DP_Panel_Orbit;

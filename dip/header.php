@@ -39,5 +39,13 @@
       <h2 class="subheader"><?php bloginfo( 'description' ); ?></h2>
     </hgroup>
     
-    <? dp_navbar('menu', array('show_submenu' => true) ); ?>
+    
   </header><!-- #head -->
+  
+  <? dp_topbar('dfgdgerg', array('dropdown' => true) ); ?>
+  
+<div class="row">
+  <? dp_topbar('menu', array('dropdown' => true, 'title'=>'Nome da bagaça') ); ?>
+</div>
+
+</div>
