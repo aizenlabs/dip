@@ -81,6 +81,20 @@ class DP_Bootstrap
     // Register menus
     if(is_array($this->config['menus']))
       register_nav_menus($this->config['menus']);
+    
+    // Register sidebars
+    if(is_array($this->config['sidebars'])) {
+      foreach ($this->config['sidebars'] as $id=>$args) {
+        if(is_int($id)) $id = $args;
+        $defaults = array(
+          'name'          => ucwords(str_replace('-', ' ', $id)),
+          'id'            => $id
+        );
+        
+        $args = array_merge($defaults, (array)$args);
+        register_sidebar($args);
+      }  
+    }  
   }
 
   protected function _call_hooks()
