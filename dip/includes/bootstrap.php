@@ -66,10 +66,14 @@ class DP_Bootstrap
     require_once('taxonomy.php');
 
     // 
-    if(!is_admin()) return;
-    require_once('form.php');
-    require_once('panel.php');
-    require_once('ui.php');
+    if(is_admin()) {
+      require_once('form.php');
+      require_once('panel.php');
+      require_once('ui.php');
+    } else {
+      require_once('helpers/template-tags.php');
+    }
+    
   }
 
   protected function _init_supports()
