@@ -19,7 +19,7 @@ wp_register_style('normalize', $dip->theme->template_directory_uri.'/assets/css/
 wp_register_style('foundation', $dip->theme->template_directory_uri.'/assets/css/foundation.css', array('normalize'), '4.2.3');
 
 wp_register_script('modernizr', $dip->theme->template_directory_uri.'/assets/js/vendor/custom.modernizr.js', false, '2.6.2');
-wp_register_script('foundation', $dip->theme->template_directory_uri.'/assets/js/foundation/foundation.js', false, '2.1.1', true);
+wp_register_script('foundation', $dip->theme->template_directory_uri.'/assets/js/foundation/foundation.min.js', false, '2.1.1', true);
 
 wp_enqueue_style('foundation');
 
@@ -29,6 +29,7 @@ wp_enqueue_script('foundation');
 function foundation_load_scripts() {
   global $dip; ?>
 <script>
+  <!-- Check for Zepto support, load jQuery if necessary -->
   document.write('<script src=<? echo $dip->theme->template_directory_uri ?>/assets/js/vendor/'
     + ('__proto__' in {} ? 'zepto' : 'jquery')
     + '.js><\/script>');

@@ -40,7 +40,7 @@ class DP_Foundation_Topbar extends DP_Menu
     else
     {
       // add toglle buttom
-      $name = !empty($this->title) ? "<h1><a href=\"#\">{$this->title}</a></h1>" : '';
+      $name = !empty($this->title) ? "<h1><a href=\"\">{$this->title}</a></h1>" : '';
       $str = "<ul class=\"title-area\"><li class=\"name\">{$name}</li> <li class=\"toggle-topbar menu-icon\"><a href=\"\"><span>Menu</span></a></li></ul>";
       $this->html->find('nav', 0)->innertext = $str;
 
