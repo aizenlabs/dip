@@ -19,6 +19,36 @@ global $dip, $loader;
 $dip = new DP_Bootstrap();
 $dip->start();
 
+/** Template tags */
+function is_login_page() {
+  return in_array($GLOBALS['pagenow'], array('wp-login.php', 'wp-register.php'));
+}
+
+/**
+ * Returns true if a site has more than 1 category
+ */
+function is_categorized() {
+  if ( false === ( $all_the_cool_cats = get_transient( 'all_the_cool_cats' ) ) ) {
+    // Create an array of all the categories that are attached to posts
+    $all_the_cool_cats = get_categories( array(
+      'hide_empty' => 1,
+    ) );
+
+    // Count the number of categories that are attached to the posts
+    $all_the_cool_cats = count( $all_the_cool_cats );
+
+    set_transient( 'all_the_cool_cats', $all_the_cool_cats );
+  }
+
+  if ( '1' != $all_the_cool_cats ) {
+    // This blog has more than 1 category so dip_categorized_blog should return true
+    return true;
+  } else {
+    // This blog has only 1 category so dip_categorized_blog should return false
+    return false;
+  }
+}
+
 
 /* include and init loader class */
 /*
