@@ -1,10 +1,10 @@
 /*
 Theme Name: Dip Framework
-Theme URI: http://underscores.me/
-Author: Underscores.me
-Author URI: http://underscores.me/
-Description: Description
-Version: 1.0
+Theme URI: http://aizenlabs.github.io/dip
+Author: Aizen Labs
+Author URI: http://labs.aizen.co
+Description: This is a modular framework to help designers extend the WordPress functions
+Version: 1.0.0
 License: GNU General Public License
 License URI: license.txt
 Tags:
@@ -12,16 +12,12 @@ Tags:
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 
- dip is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic, Inc.
+Our templates are based on Foundation, by Zurb http://foundation.zurb.com
 
-Resetting and rebuilding styles have been helped along thanks to the fine work of
-Eric Meyer http://meyerweb.com/eric/tools/css/reset/index.html
-along with Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
-and Blueprint http://www.blueprintcss.org/
 */
 
 
-/* =Global
+/* Global
 ----------------------------------------------- */
 #header { padding: 25px 0; }
 #header hgroup h1 { font-size: 2em; margin: 0; }
