@@ -35,7 +35,7 @@ class DP_Foundation_Topbar extends DP_Menu
     if ( empty( $this->nodes ) )
     {
       if(!current_user_can('edit_theme_options')) return;
-      $this->html->find('nav', 0)->innertext = "<section class=\"top-bar-section\"><ul><li><a href=\"/wp-admin/nav-menus.php\">Hey, this menu is empty! Add something here!</a></li></ul></section>";
+      $this->html->find('nav', 0)->innertext = "<section class=\"top-bar-section\"><ul><li><a href=\"/wp-admin/nav-menus.php\">Hey, this menu (<em>{$this->menu_name}</em>) is empty! Add something here!</a></li></ul></section>";
     }
     else
     {

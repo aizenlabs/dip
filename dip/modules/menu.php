@@ -117,7 +117,7 @@ class DP_Menu
     if ( empty( $this->nodes ) )
     {
       if(!current_user_can('edit_theme_options')) return;
-      $this->html->find('ul', 0)->innertext = "<li><a href=\"/wp-admin/nav-menus.php\">Hey, this menu is empty! Add something here!</a></li>";
+      $this->html->find('ul', 0)->innertext = "<li><a href=\"/wp-admin/nav-menus.php\">Hey, this menu (<em>{$this->menu_name}</em>) is empty! Add something here!</a></li>";
     }
     else
     {
