@@ -24,7 +24,7 @@ if ( post_password_required() )
 	<?php // You can start editing here -- including this comment! ?>
 
 	<?php if ( have_comments() ) : ?>
-		<h2 class="comments-title">
+		<h2 class="subheader comments-title">
 			<?php
 				printf( _nx( 'One thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', get_comments_number(), 'comments title', 'dip' ),
 					number_format_i18n( get_comments_number() ), '<span>' . get_the_title() . '</span>' );
@@ -33,7 +33,7 @@ if ( post_password_required() )
 
 		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
 		<nav id="comment-nav-above" class="navigation-comment" role="navigation">
-			<h1 class="screen-reader-text"><?php _e( 'Comment navigation', 'dip' ); ?></h1>
+			<h1 class="subheader screen-reader-text"><?php _e( 'Comment navigation', 'dip' ); ?></h1>
 			<div class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'dip' ) ); ?></div>
 			<div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'dip' ) ); ?></div>
 		</nav><!-- #comment-nav-above -->
@@ -47,13 +47,13 @@ if ( post_password_required() )
 				 * define dip_comment() and that will be used instead.
 				 * See dip_comment() in inc/template-tags.php for more.
 				 */
-				wp_list_comments( array( 'callback' => 'dip_comment' ) );
+				wp_list_comments( array( 'callback' => 'dp_comment' ) );
 			?>
 		</ol><!-- .comment-list -->
 
 		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
 		<nav id="comment-nav-below" class="navigation-comment" role="navigation">
-			<h1 class="screen-reader-text"><?php _e( 'Comment navigation', 'dip' ); ?></h1>
+			<h1 class="subheader screen-reader-text"><?php _e( 'Comment navigation', 'dip' ); ?></h1>
 			<div class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'dip' ) ); ?></div>
 			<div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'dip' ) ); ?></div>
 		</nav><!-- #comment-nav-below -->

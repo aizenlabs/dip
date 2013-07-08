@@ -9,7 +9,7 @@
  
  /** Get theme info */
  global $dip; ?>
-  <footer class="row"  role="contentinfo">
+  <footer class="row" role="contentinfo">
     <div class="large-12 columns">
       <hr />
       <div class="row">
