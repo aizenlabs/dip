@@ -23,6 +23,6 @@ and Blueprint http://www.blueprintcss.org/
 
 /* =Global
 ----------------------------------------------- */
-#header { margin-bottom: 15px; }
-#header hgroup, #header nav { margin-top: 15px; }
-#header hgroup h1, #header hgroup h2 { font-size: 1.1em; margin: 0; }
+#header { padding: 25px 0; }
+#header hgroup h1 { font-size: 2em; margin: 0; }
+#header hgroup h2 { font-size: 1.3em; margin: 7px 0; }

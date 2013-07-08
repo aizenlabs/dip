@@ -13,23 +13,15 @@
     <div class="large-12 columns">
       <hr />
       <div class="row">
-        <div class="large-6 columns">
+        <div class="large-6 small 12 columns columns">
           <p>&copy; This is version <strong><?php echo $dip->theme->version; ?></strong> from the <?php echo $dip->theme->name; ?></p>
         </div>
-        <div class="large-6 columns">
-          <ul class="inline-list right">
-            <li><a href="#">Link 1</a></li>
-            <li><a href="#">Link 2</a></li>
-            <li><a href="#">Link 3</a></li>
-            <li><a href="#">Link 4</a></li>
-          </ul>
+        <div class="large-6 small-12 columns">
+          <?php dp_menu('footer', array('attr' => array('class' => 'inline-list right')) ); ?>
         </div>
       </div>
     </div>
   </footer>
-
-<!-- Included JS Files (Compressed) -->
-<?php get_template_part('scripts'); ?>
 
 <?php wp_footer(); ?>
 </body>

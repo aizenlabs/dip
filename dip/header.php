@@ -34,11 +34,12 @@
   <?php do_action('before'); ?>
   
   <header id="header" class="row">
-    <hgroup class="large-3 small-12 columns">
-      <h1><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-      <h2 class="subheader"><?php bloginfo( 'description' ); ?></h2>
+    <hgroup class="large-12 columns">
+      <h1 class="left"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+      <h2 class="subheader right hide-for-small"><?php bloginfo( 'description' ); ?></h2>
     </hgroup>
-    <?php dp_topbar('menu', array('dropdown' => true, 'attr' => array('class' => 'large-9 small-12 columns')) ); ?>
   </header>
 
-</div>
+  <div class="row">
+    <?php dp_topbar('menu', array('dropdown' => true, 'attr' => array('class' => 'contain-to-grid')) ); ?>
+  </div>
