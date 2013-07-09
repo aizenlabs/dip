@@ -36,8 +36,6 @@
       <h1 class="large-5 small-12 columns"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
       <h2 class="subheader large-7 columns hide-for-small"><?php bloginfo( 'description' ); ?></h2>
     </hgroup>
-  </header>
-
-  <div id="navigation">
+    
     <?php dp_topbar('menu', array('dropdown' => true, 'attr' => array('class' => 'row')) ); ?>
-  </div>
+  </header>
