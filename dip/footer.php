@@ -9,6 +9,9 @@
 
 global $dip; ?>
 
+    </div><!-- .row -->
+  </section><!-- #main -->
+
   <aside id="footer-widgets" class="widgets hide-for-small">
     <div class="row">
       <div class="large-12 columns">
@@ -21,7 +24,7 @@ global $dip; ?>
     </div>
   </aside>
 
-  <footer id="footer">
+  <footer id="footer" role="contentinfo">
     <div class="row">
       <div class="large-8 push-4 columns">
        <?php dp_menu('footer', array('attr' => array('class' => 'inline-list')) ); ?>
