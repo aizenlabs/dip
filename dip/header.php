@@ -2,7 +2,7 @@
 /**
  * The Header for our theme.
  *
- * Displays all of the <head> section and everything up till <div id="main">
+ * Displays all of the <head> section and <header>
  *
  * @package dip
  */
@@ -18,7 +18,7 @@
   <!-- Set the viewport width to device width for mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title><?php wp_title( '|', true, 'right' ); ?></title>
+  <title><?php wp_title('|', true, 'right'); ?></title>
   <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
   <!-- IE Fix for HTML5 Tags -->
@@ -30,16 +30,14 @@
 </head>
 
 <body <?php body_class(); ?>>
-
-  <?php do_action('before'); ?>
   
-  <header id="header" class="row">
-    <hgroup class="large-12 columns">
-      <h1 class="left"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-      <h2 class="subheader right hide-for-small"><?php bloginfo( 'description' ); ?></h2>
+  <header id="header">
+    <hgroup class="row">
+      <h1 class="large-5 small-12 columns"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+      <h2 class="subheader large-7 columns hide-for-small"><?php bloginfo( 'description' ); ?></h2>
     </hgroup>
   </header>
 
-  <div class="row">
-    <?php dp_topbar('menu', array('dropdown' => true, 'attr' => array('class' => 'contain-to-grid')) ); ?>
+  <div id="navigation">
+    <?php dp_topbar('menu', array('dropdown' => true, 'attr' => array('class' => 'row')) ); ?>
   </div>

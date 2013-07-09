@@ -23,10 +23,10 @@ global $dip; ?>
 
   <footer id="footer">
     <div class="row">
-      <div class="large-8 small-12 push-4 columns">
-       <?php dp_menu('footer', array('attr' => array('class' => 'inline-list right')) ); ?>
+      <div class="large-8 push-4 columns">
+       <?php dp_menu('footer', array('attr' => array('class' => 'inline-list')) ); ?>
       </div>
-      <div class="large-4 small-12 pull-8 columns">
+      <div class="large-4 pull-8 columns">
         <p><?php echo $dip->theme->parent()->name; ?> &copy; 2013 <?php echo $dip->theme->parent()->author; ?></p>
       </div>
     </div>

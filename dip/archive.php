@@ -87,7 +87,7 @@ get_header(); ?>
 
 			<?php endwhile; ?>
 
-			<?php dip_content_nav( 'nav-below' ); ?>
+			<?php dp_content_nav( 'nav-below' ); ?>
 
 		<?php else : ?>
 
