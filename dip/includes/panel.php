@@ -110,7 +110,8 @@ abstract class DP_Panel
   {
     $separator = strpos($this->parent, '?') ? '&' : '?';
     $tab_query = !is_null($tab) ? "&tab={$tab}" : '';
-    return admin_url("{$this->parent}{$separator}page={$this->namespace}{$tab_query}{$sufix}");
+    $page_base = !empty($this->parent) ? $this->parent : 'admin.php';
+    return admin_url("{$page_base}{$separator}page={$this->namespace}{$tab_query}{$sufix}");
   }
   
   /**
