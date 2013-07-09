@@ -41,19 +41,20 @@ class DP_Foundation_Orbit
     if( !empty($this->attr['id']) )
       $this->html->find('div', 0)->id = $this->attr['id'];
     
+    // add orbit preloader
+    $this->html->find('div', 0)->innertext .= '<div class="preloader"></div>';
+    
+    // add slides wrapper and reload the parser
+    $this->html->find('div', 0)->innertext .= '<ul data-orbit></ul>';
+    $this->html = str_get_html($this->html);
+    
     if ( empty( $this->nodes ) )
     {
-      return;
+      if(!current_user_can('edit_theme_options')) return;
+      $this->html->find('ul', 0)->innertext .= '<li><span style="display: block; font-size: 3em; line-height: 7em; text-align: center;">Hey, you need add some slides here!</span></li>"';
     }
     else
     {
-      // add orbit preloader
-      $this->html->find('div', 0)->innertext .= '<div class="preloader"></div>';
-      
-      // add slides wrapper and reload the parser
-      $this->html->find('div', 0)->innertext .= '<ul data-orbit></ul>';
-      $this->html = str_get_html($this->html);
-      
       foreach ($this->nodes as $slide)
         $this->html->find('ul', 0)->innertext .= "<li><img src=\"{$slide['image']}\" /></li>";
     }
