@@ -22,11 +22,18 @@ html { background-color: #2f2f2f; }
 body { color: #333; background-color: #fff; }
 ul, p, input, button, .button { font-weight: 300; }
 
+/* Foundation */
 .top-bar-section ul li > a, .top-bar-section .dropdown li a  { font-weight: 300; }
 
+.orbit-slide-number, .orbit-timer { display: none; }
+.orbit-bullets  { text-align: center; }
+.orbit-bullets li { float: none; display: inline-block; border: none; width: 14px; height: 14px; margin-right: 9px; }
+
+/* WordPress */
 .widget, .widget > ul { list-style: none; margin-left: 0; }
 .widgettitle { font-weight: 300; font-size: 1.5em; }
 
+/* Templates */
 .not-found { text-align: center; padding: 3em 0 7em; }
 
 /* Header
@@ -36,6 +43,11 @@ ul, p, input, button, .button { font-weight: 300; }
 #header hgroup h2 { font-size: 1.3em; line-height: 3.5em; text-align: right; }
 #header hgroup h1 a, #header hgroup h2 { color: #fff; }
 #header nav { margin-bottom: .5em; }
+
+/* Header
+----------------------------------------------- */
+.orbit-bullets li { background-color: #eee; }
+.orbit-bullets li.active { background-color: #2BA6CB; }
 
 /* Footer
 ----------------------------------------------- */

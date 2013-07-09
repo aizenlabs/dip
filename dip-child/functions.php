@@ -5,7 +5,7 @@ $loader['config'] = array(
   'foundation'   => '4',
   'adminbar'     => false,
   'menus'        => array('menu' => 'Main menu', 'top' => 'Top menu'),
-  'sidebars'     => array('footer')
+  'sidebars'     => array('home', 'footer')
 );
 
 $loader['modules'] = array(
