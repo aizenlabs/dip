@@ -78,6 +78,10 @@ class DP_Bootstrap
 
   protected function _init_supports()
   {
+    // Remove admin bar
+    if($this->config['adminbar'] == false)
+      add_filter('show_admin_bar', '__return_false');  
+    
     // Register menus
     if(is_array($this->config['menus']))
       register_nav_menus($this->config['menus']);

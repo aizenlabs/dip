@@ -3,6 +3,7 @@ global $loader;
 
 $loader['config'] = array(
   'foundation'   => '4',
+  'adminbar'     => false,
   'menus'        => array('menu' => 'Main menu', 'top' => 'Top menu'),
   'sidebars'     => array('footer')
 );
