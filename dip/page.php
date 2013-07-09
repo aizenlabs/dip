@@ -13,7 +13,7 @@
 get_header(); ?>
 
   <?php while ( have_posts() ) : the_post(); ?>
-  <article id="page-<?php the_ID(); ?>" <?php post_class('large-9 columns'); ?> role="main">
+  <article id="page-<?php the_ID(); ?>" <?php post_class('large-8 columns'); ?> role="main">
     <header class="entry-header">
       <h1 class="entry-title"><?php the_title(); ?></h1>
       <?php dp_breadcrumbs('main'); ?>
@@ -32,8 +32,8 @@ get_header(); ?>
   </article><!-- #page-## -->
   <?php endwhile; // end of the loop. ?>
 
-  <aside id="sidebar" class="large-3 columns hide-for-small">
+  <aside id="sidebar" class="widget-area large-4 columns hide-for-small" role="complementary">
     <?php get_sidebar(); ?>
-  </aside><!-- .large-3 .columns .hide-for-small -->
+  </aside><!-- #sidebar -->
 
 <?php get_footer(); ?>
