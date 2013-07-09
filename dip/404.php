@@ -7,7 +7,7 @@
 
 get_header(); ?>
 
-  <article class="large-9 small-11 small-centered columns not-found" role="article">
+  <article class="large-9 small-11 small-centered columns not-found" role="main">
     <header class="entry-header">
       <h1 class="entry-title"><?php _e('Oops! That page can&rsquo;t be found.', 'dip'); ?></h1>
     </header><!-- .entry-header -->

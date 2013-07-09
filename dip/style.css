@@ -38,16 +38,20 @@ ul, p, input, button, .button { font-weight: 300; }
 
 /* Header
 ----------------------------------------------- */
-#header { background-color: #2BA6CB; padding: .4em 0; }
+#header { background-color: #2BA6CB; padding: .4em 0; margin-bottom: 2em; }
 #header hgroup h1 { font-size: 2em; font-weight: 300; line-height: 2.1em; padding-left: .5em; white-space: nowrap; }
 #header hgroup h2 { font-size: 1.3em; line-height: 3.5em; text-align: right; }
 #header hgroup h1 a, #header hgroup h2 { color: #fff; }
 #header nav { margin-bottom: .5em; }
 
-/* Header
+/* Orbit 
 ----------------------------------------------- */
 .orbit-bullets li { background-color: #eee; }
 .orbit-bullets li.active { background-color: #2BA6CB; }
+
+/* Pages
+----------------------------------------------- */
+#main { margin-bottom: 3.5em; }
 
 /* Footer
 ----------------------------------------------- */
