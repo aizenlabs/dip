@@ -32,7 +32,7 @@ ul, p, input, button, .button { font-weight: 300; }
 
 /* WordPress */
 .widget, .widget > ul { list-style: none; margin-left: 0; }
-.widgettitle { font-weight: 300; font-size: 1.5em; }
+.widgettitle { font-weight: 300; font-size: 1.1em; }
 
 .entry-meta { background-color: #F6F6F6; border: 1px #DCDCDC solid; border-radius: 3px; padding: 0.5em 0.85em;
               font-size: .8em; font-weight: 300; line-height: 1.2em; }
