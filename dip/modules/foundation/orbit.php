@@ -77,7 +77,7 @@ class DP_Panel_Orbit extends DP_Panel
 
     $this->parent    = false;
     $this->position  = 23.05;
-    $this->icon      = 'rectangles';
+    $this->icon      = 'star';
   }
     
   public function save_settings()
