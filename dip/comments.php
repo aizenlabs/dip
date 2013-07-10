@@ -42,10 +42,10 @@ if ( post_password_required() )
 		<ol class="comment-list">
 			<?php
 				/* Loop through and list the comments. Tell wp_list_comments()
-				 * to use dip_comment() to format the comments.
+				 * to use dp_comment() to format the comments.
 				 * If you want to overload this in a child theme then you can
-				 * define dip_comment() and that will be used instead.
-				 * See dip_comment() in inc/template-tags.php for more.
+				 * define dp_comment() and that will be used instead.
+				 * See dp_comment() in inc/template-tags.php for more.
 				 */
 				wp_list_comments( array( 'callback' => 'dp_comment' ) );
 			?>

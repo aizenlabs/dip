@@ -55,7 +55,11 @@ if ( ! function_exists( 'dp_comment' ) ) :
  * Used as a callback by wp_list_comments() for displaying the comments.
  */
 function dp_comment( $comment, $args, $depth ) {
+  global $dip;
   $GLOBALS['comment'] = $comment;
+
+  // change avatar size
+  if(!empty($dip->config['avatars'])) $args['avatar_size'] = $dip->config['avatars']['size'];
 
   if ( 'pingback' == $comment->comment_type || 'trackback' == $comment->comment_type ) : ?>
 
@@ -69,8 +73,10 @@ function dp_comment( $comment, $args, $depth ) {
   <li id="comment-<?php comment_ID(); ?>" <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?>>
     <article id="div-comment-<?php comment_ID(); ?>" class="comment-body">
       <footer class="comment-meta">
-        <div class="comment-author vcard">
+        <div class="comment-author-avatar">
           <?php if ( 0 != $args['avatar_size'] ) echo get_avatar( $comment, $args['avatar_size'] ); ?>
+        </div>
+        <div class="comment-author vcard">
           <?php printf( __( '%s <span class="says">says:</span>', 'dip' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
         </div><!-- .comment-author -->
 
@@ -80,7 +86,7 @@ function dp_comment( $comment, $args, $depth ) {
               <?php printf( _x( '%1$s at %2$s', '1: date, 2: time', 'dip' ), get_comment_date(), get_comment_time() ); ?>
             </time>
           </a>
-          <?php edit_comment_link( __( 'Edit', 'dip' ), '<span class="edit-link">', '</span>' ); ?>
+          <?php edit_comment_link( __( 'edit', 'dip' ), '<span class="edit-link">- ', '</span>' ); ?>
         </div><!-- .comment-metadata -->
 
         <?php if ( '0' == $comment->comment_approved ) : ?>
@@ -90,11 +96,11 @@ function dp_comment( $comment, $args, $depth ) {
 
       <div class="comment-content">
         <?php comment_text(); ?>
+
+        <?php comment_reply_link( array_merge( $args, array( 'add_below' => 'div-comment', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
       </div><!-- .comment-content -->
 
-      <div class="reply">
-        <?php comment_reply_link( array_merge( $args, array( 'add_below' => 'div-comment', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
-      </div><!-- .reply -->
+      
     </article><!-- .comment-body -->
 
   <?php

@@ -12,9 +12,6 @@ get_header(); ?>
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="main">
       <header class="entry-header">
         <h1 class="entry-title"><?php the_title(); ?></h1>
-        <div class="entry-meta">
-          <?php dp_posted_on(); ?>
-        </div><!-- .entry-meta -->
       </header><!-- .entry-header -->
   
       <div class="entry-content">
@@ -29,6 +26,9 @@ get_header(); ?>
       
       <footer class="entry-meta">
       <?php
+        dp_posted_on();
+        echo '<br />';
+      
         /* translators: used between list items, there is a space after the comma */
         $category_list = get_the_category_list( __(', ', 'dip') );
   
@@ -62,8 +62,7 @@ get_header(); ?>
         );
       ?>
       </footer><!-- .entry-meta -->
-      
-      <?php dp_content_nav( 'nav-below' ); ?>    
+
     </article><!-- #page-## -->
   
     <?php
