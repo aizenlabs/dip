@@ -13,14 +13,14 @@ class DP_Bootstrap
   public $config;
   public $modules;
   public $ui;
-  
-	function __construct()
-	{
-	  global $loader;
+
+  function __construct()
+  {
+    global $loader;
 
     $this->config  = $loader['config'];
-    $this->modules = $loader['modules']; 
-    
+    $this->modules = array_replace(array('foundation'=>true), $loader['modules']); 
+
     /** get all theme info */
     $this->theme = wp_get_theme();
     $this->theme->stylesheet_uri           = get_stylesheet_uri();
@@ -30,7 +30,7 @@ class DP_Bootstrap
     $this->_include_libs();
 
     if(!is_admin()) return;
-		$this->ui = new DP_UserInterface();
+    $this->ui = new DP_UserInterface();
     set_error_handler(array(&$this->ui, 'admin_alert_errors'), E_ERROR ^ E_CORE_ERROR ^ E_COMPILE_ERROR ^ E_USER_ERROR ^ E_RECOVERABLE_ERROR ^ E_CORE_WARNING ^ E_COMPILE_WARNING ^ E_USER_WARNING ^ E_USER_NOTICE ^ E_DEPRECATED ^ E_USER_DEPRECATED ^ E_PARSE);
   }
   
@@ -40,20 +40,6 @@ class DP_Bootstrap
     $this->_load_modules();
     $this->_call_hooks();
     $this->_load_scripts();
-  }
-
-  protected function _load_scripts()
-  {
-    if(is_admin() || is_login_page()) return;
-    wp_register_style('dip', $this->theme->stylesheet_uri, false, $this->theme->version);
-
-    if(is_child_theme() && file_exists($this->theme->stylesheet_directory_uri.'/script.js'))
-      wp_register_script('dip', $this->theme->stylesheet_directory_uri.'/script.js', false, $this->theme->version, true);
-    else
-      wp_register_script('dip', $this->theme->template_directory_uri.'/script.js', false, $this->theme->parent()->version, true);
-
-    wp_enqueue_style('dip');
-    wp_enqueue_script('dip');
   }
 
   protected function _include_libs()
@@ -72,8 +58,14 @@ class DP_Bootstrap
       require_once('ui.php');
     } else {
       require_once('helpers/template-tags.php');
-    }
-    
+    } 
+  }
+
+  protected function _call_hooks()
+  {
+    /** wp-admin hooks */
+    if(!is_admin()) return;
+    add_action('admin_print_styles', array(&$this->ui, 'apply'));
   }
 
   protected function _init_supports()
@@ -101,15 +93,9 @@ class DP_Bootstrap
     }  
   }
 
-  protected function _call_hooks()
-  {
-    /** wp-admin hooks */
-    if(!is_admin()) return;
-    add_action('admin_print_styles', array(&$this->ui, 'apply'));
-  }
-
   protected function _load_modules()
   {
+    if(!is_array($this->modules)) return;
     foreach($this->modules as $module=>$args)
     {
       if($args === true)
@@ -118,5 +104,19 @@ class DP_Bootstrap
         include_once($filename);
       }
     }
+  }
+
+  protected function _load_scripts()
+  {
+    if(is_admin() || is_login_page()) return;
+    wp_register_style('dip', $this->theme->stylesheet_uri, false, $this->theme->version);
+
+    if(is_child_theme() && file_exists($this->theme->stylesheet_directory_uri.'/script.js'))
+      wp_register_script('dip', $this->theme->stylesheet_directory_uri.'/script.js', false, $this->theme->version, true);
+    else
+      wp_register_script('dip', $this->theme->template_directory_uri.'/script.js', false, $this->theme->parent()->version, true);
+
+    wp_enqueue_style('dip');
+    wp_enqueue_script('dip');
   }
 }
