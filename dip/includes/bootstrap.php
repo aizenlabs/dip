@@ -19,7 +19,7 @@ class DP_Bootstrap
     global $loader;
 
     $this->config  = $loader['config'];
-    $this->modules = array_replace(array('foundation'=>true), $loader['modules']); 
+    $this->modules = array_replace(array('foundation'=>true), (array)$loader['modules']); 
 
     /** get all theme info */
     $this->theme = wp_get_theme();
