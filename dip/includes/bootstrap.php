@@ -39,7 +39,6 @@ class DP_Bootstrap
     $this->_init_supports();
     $this->_load_modules();
     $this->_call_hooks();
-    $this->_load_scripts();
   }
 
   protected function _include_libs()
@@ -63,9 +62,13 @@ class DP_Bootstrap
 
   protected function _call_hooks()
   {
-    /** wp-admin hooks */
-    if(!is_admin()) return;
-    add_action('admin_print_styles', array(&$this->ui, 'apply'));
+    if(is_admin()) {
+      /** wp-admin hooks */
+      add_action('admin_print_styles', array(&$this->ui, 'apply'));
+    } else {
+      /** theme hooks */
+      add_action('init', array(&$this, '_load_scripts'));
+    }
   }
 
   protected function _init_supports()
@@ -100,21 +103,22 @@ class DP_Bootstrap
     {
       if($args === true)
       {
-        $filename = stream_resolve_include_path("modules/{$module}.php") ? "modules/{$module}.php" : "modules/{$module}/init.php";
+        $filename = stream_resolve_include_path("modules/{$module}.php") ? "modules/{$module}.php" : "modules/{$module}/{$module}.php";
         include_once($filename);
       }
     }
   }
 
-  protected function _load_scripts()
+  public function _load_scripts()
   {
-    if(is_admin() || is_login_page()) return;
     wp_register_style('dip', $this->theme->stylesheet_uri, false, $this->theme->version);
 
     if(is_child_theme() && file_exists($this->theme->stylesheet_directory_uri.'/script.js'))
       wp_register_script('dip', $this->theme->stylesheet_directory_uri.'/script.js', false, $this->theme->version, true);
-    else
+    elseif(is_child_theme())
       wp_register_script('dip', $this->theme->template_directory_uri.'/script.js', false, $this->theme->parent()->version, true);
+    else
+      wp_register_script('dip', $this->theme->template_directory_uri.'/script.js', false, $this->theme->version, true);
 
     wp_enqueue_style('dip');
     wp_enqueue_script('dip');

@@ -30,7 +30,11 @@ global $dip; ?>
        <?php dp_menu('footer', array('attr' => array('class' => 'inline-list')) ); ?>
       </div>
       <div class="large-4 pull-8 columns">
-        <p><?php echo $dip->theme->parent()->name; ?> &copy; 2013 <?php echo $dip->theme->parent()->author; ?></p>
+<?php if(is_child_theme()) : ?>
+        <p><?php echo $dip->theme->parent()->name; ?> &copy; 2013 by <?php echo $dip->theme->parent()->author; ?></p>
+<?php else : ?>
+        <p><?php echo $dip->theme->name; ?> &copy; 2013 by <?php echo $dip->theme->author; ?></p>
+<?php endif; ?>
       </div>
     </div>
   </footer>
