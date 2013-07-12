@@ -44,6 +44,7 @@ class DP_Bootstrap
   {
     // Libraries
     require_once('vendor/simplehtmldom.php');
+    require_once('helpers/array.php');
 
     // Module classes
     require_once('post-type.php');
