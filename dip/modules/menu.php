@@ -131,7 +131,7 @@ class DP_Menu
 
   protected function _render_node($_parent)
   {
-    if( !is_array($this->nodes[$_parent]) ) return;
+    if( !isset($this->nodes[$_parent]) || !is_array($this->nodes[$_parent]) ) return;
 
     foreach( $this->nodes[$_parent] as $node )
     {
@@ -139,7 +139,7 @@ class DP_Menu
       $node_html->find('li a', 0)->href = $node->url;
 
       // init dropdown
-      if( is_array($this->nodes[$node->id]) && $this->dropdown )
+      if( isset($this->nodes[$node->id]) && is_array($this->nodes[$node->id]) && $this->dropdown )
       {
         $node->classes[] = 'has-dropdown';
         $node_html->find('li', 0)->innertext .= "<ul class=\"dropdown nth-{$node->id}\"></ul>";
