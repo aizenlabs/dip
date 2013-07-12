@@ -44,7 +44,7 @@ abstract class DP_Panel
     if($this->parent==false) $dip->ui->set_menu_icon('toplevel_page_'.$this->namespace, $this->icon);
 
     /** only if is a form submit */
-    if (!empty($_POST) && $_POST['option_page'] == $this->namespace)
+    if (isset($_POST['option_page']) && $_POST['option_page'] == $this->namespace)
     {
       /** call abstract method to save */
       $this->save_settings();

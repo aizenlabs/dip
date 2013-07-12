@@ -31,7 +31,6 @@ class DP_Bootstrap
 
     if(!is_admin()) return;
     $this->ui = new DP_UserInterface();
-    set_error_handler(array(&$this->ui, 'admin_alert_errors'), E_ERROR ^ E_CORE_ERROR ^ E_COMPILE_ERROR ^ E_USER_ERROR ^ E_RECOVERABLE_ERROR ^ E_CORE_WARNING ^ E_COMPILE_WARNING ^ E_USER_WARNING ^ E_USER_NOTICE ^ E_DEPRECATED ^ E_USER_DEPRECATED ^ E_PARSE);
   }
   
   public function start()
@@ -74,15 +73,15 @@ class DP_Bootstrap
   protected function _init_supports()
   {
     // Remove admin bar
-    if($this->config['adminbar'] == false)
+    if(isset($this->config['adminbar']) && $this->config['adminbar'] == false)
       add_filter('show_admin_bar', '__return_false');  
     
     // Register menus
-    if(is_array($this->config['menus']))
+    if(isset($this->config['menus']) && is_array($this->config['menus']))
       register_nav_menus($this->config['menus']);
     
     // Register sidebars
-    if(is_array($this->config['sidebars'])) {
+    if(isset($this->config['sidebars']) && is_array($this->config['sidebars'])) {
       foreach ($this->config['sidebars'] as $id=>$args) {
         if(is_int($id)) $id = $args;
         $defaults = array(
