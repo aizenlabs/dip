@@ -23,13 +23,12 @@ class DP_Foundation_Topbar extends DP_Menu
   {
     global $post;
 
-    // open tag
+    // open tag and add extra classes
     $classes = isset($this->attr['class']) ? ' ' . $this->attr['class'] : '';
     $this->html = str_get_html("<nav class=\"top-bar{$classes}\"></nav>");
 
-    // define navbar id
-    if( !empty($this->attr['id']) )
-      $this->html->find('nav', 0)->id = $this->attr['id'];
+    // add others attributes to main tag
+    $this->_add_html_attr();
 
     // render content
     if ( empty( $this->nodes ) )

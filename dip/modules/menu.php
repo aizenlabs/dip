@@ -109,9 +109,8 @@ class DP_Menu
     $classes = isset($this->attr['class']) ? ' ' . $this->attr['class'] : '';
     $this->html = str_get_html("<ul class=\"nth-{$this->depth}{$classes}\"></ul>");
 
-    // define ul id
-    if( !empty($this->attr['id']) )
-      $this->html->find('ul', 0)->id = $this->attr['id'];
+    // add others attributes to main tag
+    $this->_add_html_attr();
 
     // render content
     if ( empty( $this->nodes ) )
@@ -127,6 +126,18 @@ class DP_Menu
 
     // print
     echo $this->html;
+  }
+
+  protected function _add_html_attr()
+  {
+    $attrs = $this->attr;
+    unset($attrs['class']);
+
+    if(empty($attrs)) return;
+
+    foreach ($attrs as $attr => $value) {
+      $this->html->find('nav', 0)->$attr = $value;
+    }
   }
 
   protected function _render_node($_parent)
