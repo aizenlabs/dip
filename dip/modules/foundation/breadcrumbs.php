@@ -47,8 +47,15 @@ class DP_Foundation_Breadcrumbs
 
   private function _process()
   {
-    if( $this->nodes[] = $this->_get_current_item() )
+    if(!is_array($this->menu_items)) return;
+
+    /** init process by current page */
+    $current = $this->_get_current_item();
+
+    if($current)
     {
+      $this->nodes[] = $current;
+
       /** get first parent id */
       $current = $this->nodes[0]->parent;
 
@@ -58,23 +65,25 @@ class DP_Foundation_Breadcrumbs
         $this->nodes[] = $node;
         $current = $node->parent;
       }
-
-      /** add home */
-      $node = new stdClass();
-
-      $node->title = 'Home';
-      $node->url = home_url('/');
-      $node->alt = __('Go to home page');
-
-      $this->nodes[] = $node;
-        
-      /** reorder nodes array */
-      $this->nodes = array_reverse($this->nodes);
     }
+
+    /** add home */
+    $node = new stdClass();
+
+    $node->title = 'Home';
+    $node->url = home_url('/');
+    $node->alt = __('Go to home page');
+
+    $this->nodes[] = $node;
+      
+    /** reorder nodes array */
+    $this->nodes = array_reverse($this->nodes);
   }
 
   protected function _get_current_item()
   {
+    if(!is_array($this->menu_items)) return;
+
     /** set default return */
     $node = false;
 
@@ -124,8 +133,13 @@ class DP_Foundation_Breadcrumbs
     $this->html = str_get_html('<ul class="breadcrumbs"></ul>');
 
     /** define breadcrumb id */
-    if( !empty($this->attr['id']) )
+    if(!empty($this->attr['id']))
       $this->html->find('ul', 0)->id = $this->attr['id'];
+    
+    if(empty($this->nodes) && current_user_can('edit_theme_options')) {
+      $str = str_get_html("<li><a href=\"#\" alt=\"\">".__('Hey, the indicated menu is empty or does not exists!')."</a></li>");
+      $this->html->find('ul', 0)->innertext .= $str;
+    }
 
     foreach ($this->nodes as $node)
     {
