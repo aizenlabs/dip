@@ -12,14 +12,19 @@ class DP_Bootstrap
   public $theme;
   public $config;
   public $modules;
+  public $routes;
   public $ui;
 
   function __construct()
   {
     global $loader;
 
-    $this->config  = $loader['config'];
-    $this->modules = array_replace(array('foundation'=>true), (array)$loader['modules']); 
+    $this->config  = isset($loader['config']) ? $loader['config'] : array();
+    $this->routes  = isset($loader['routes']) ? $loader['routes'] : false; 
+    $this->modules = array_replace(array('foundation'=>true), (array)$loader['modules']);
+
+    /** run the router to redirect pages */
+    $this->_run_router();
 
     /** get all theme info */
     $this->theme = wp_get_theme();
@@ -38,6 +43,27 @@ class DP_Bootstrap
     $this->_init_supports();
     $this->_load_modules();
     $this->_call_hooks();
+  }
+  
+  protected function _run_router()
+  {
+    if($this->routes)
+      add_action('template_redirect', array(&$this, '_set_router'));
+    else
+      return false;
+  }
+
+  public function _set_router()
+  {
+    global $wp_query, $post; 
+
+    foreach($this->routes as $key=>$value)
+    {
+      if(is_page($key)) {
+        wp_redirect( site_url($value) );
+        exit;
+      }
+    }
   }
 
   protected function _include_libs()
