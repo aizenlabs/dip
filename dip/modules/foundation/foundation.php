@@ -26,6 +26,7 @@ class DP_Foundation
   {
     require('breadcrumbs.php');
     require('orbit.php');
+    require('pagination.php');
     require('topbar.php');
   }
   
