@@ -1,6 +1,6 @@
 <?php
 /**
- * The helper for displaying Breadcrumbs
+ * The helper for displaying pagination links
  *
  * @package Dip Framework
  * @subpackage Foundation Module
@@ -8,183 +8,165 @@
  * @since Dip Framework 1.0
  */
 
-/**
- * @param string $menu menu name or registered location
- */
-function dp_pagination()
+function dp_pagination($args = null)
 {
-  $obj = new DP_Foundation_Pagination();
+  $obj = new DP_Foundation_Pagination($args);
   $obj->render();
-};
+}
 
 class DP_Foundation_Pagination
 {
-  private $format  = '?page=%#%';
-  private $total   = 1;
-  private $current = 0;
- /* 'show_all'     => False,
-  'end_size'     => 1,
-  'mid_size'     => 2,
-  'prev_next'    => True,
-  'prev_text'    => __('« Previous'),
-  'next_text'    => __('Next »'),
-  'type'         => 'plain',
-  'add_args'     => False,
-  'add_fragment' => '' */
-  
-  
-  
-  
-  private $menu_name;
-  private $menu_items;
+  private $base;
+  private $format;
+  private $search;
+  private $total;
+  private $current;
+  private $show_all;
+  private $end_size;
+  private $mid_size;
+  private $prev_next;
+  private $prev_text;
+  private $next_text;
 
-  private $self_url;
+  private $centered;
 
-  private $html;
   private $nodes;
+  private $html;
 
-  public function  __construct()
+  public function  __construct($args)
   {
-    $str = (get_query_var('s')) ? get_query_var('s') : '';
-$paged = (get_query_var('page')) ? (int)get_query_var('page') : 1;
+    global $wp_query;
 
-$base = preg_replace('/\?.*/', '', $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] );
-$base .= (get_query_var('s')) ? '?s=' . $str : '';
-
-$format = (get_query_var('s')) ? '&' : '?';
-$format .= 'page=%#%';
-
-var_dump($str, $format);
-
-exit;
+    $protocol           = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
+    $this->base         = $protocol . preg_replace('/\?.*/', '', $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] );
     
-    /** check if parameter is a menu location */
-    if(has_nav_menu($_menu)) {
-      $theme_locations = get_nav_menu_locations();
-      $menu_obj = get_term( $theme_locations[$_menu], 'nav_menu' );
-      $this->menu_name = $menu_obj->name;
-    } else {
-      $this->menu_name = $_menu;
-    }
+    $this->format       = isset($args['format']) ? $args['format'] : '?page=%#%';
+    $this->search       = get_query_var('s') ? get_query_var('s') : false;
 
-    $this->self_url   = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-    $this->menu_items = wp_get_nav_menu_items($this->menu_name);    
-    $this->nodes      = array();
+    $this->total        = $wp_query->max_num_pages;
+    $this->current      = get_query_var('page') ? (int)get_query_var('page') : 1;
 
+    $this->end_size     = isset($args['end_size']) ? $args['end_size'] : 1;
+    $this->mid_size     = isset($args['mid_size']) ? $args['mid_size'] : 2;
+
+    $this->prev_next    = isset($args['prev_next']) ? $args['prev_next'] : true;
+    $this->prev_text    = isset($args['prev_text']) ? $args['prev_text'] : '&laquo';
+    $this->next_text    = isset($args['next_text']) ? $args['next_text'] : '&raquo';
+
+    $this->centered     = isset($args['centered']) ? $args['centered'] : true;
+    
     $this->_process();
   }
 
-  private function _process()
+  protected function _process()
   {
-    if(!is_array($this->menu_items)) return;
-
-    /** init process by current page */
-    $current = $this->_get_current_item();
-
-    if($current)
+    /* add search query into base format */
+    if($this->search)
     {
-      $this->nodes[] = $current;
-
-      /** get first parent id */
-      $current = $this->nodes[0]->parent;
-
-      while( $current != 0 ) {
-        $node = $this->_get_parent_item($current);
-
-        $this->nodes[] = $node;
-        $current = $node->parent;
-      }
+      $this->format = str_replace('?', "?s={$this->search}&", $this->format);
+    }
+    
+    /** add mid nodes */
+    for($i = $this->current - $this->mid_size; $i <= $this->current + $this->mid_size; $i++)
+    {
+      if($i > 0 && $i != $this->current && $i <= $this->total)
+        $this->nodes[$i] = $this->_get_node($i);
     }
 
-    /** add home */
-    $node = new stdClass();
+    /** add start and end nodes */
+    for($i = 1; $i <= $this->end_size; $i++)
+    {
+      $this->nodes[$i] = $this->_get_node($i);
 
-    $node->title = 'Home';
-    $node->url = home_url('/');
-    $node->alt = __('Go to home page');
+      if($i == $this->end_size && !isset($this->nodes[$this->end_size + 1]))
+        $this->nodes[$this->end_size + 1] = $this->_get_node($this->end_size + 1, 'dots');
+    }
 
-    $this->nodes[] = $node;
-      
-    /** reorder nodes array */
-    $this->nodes = array_reverse($this->nodes);
+    for($i = $this->total; $i > $this->total - $this->end_size; $i--)
+    {
+      $this->nodes[$i] = $this->_get_node($i);
+
+      if($i == ($this->total - $this->end_size + 1) && !isset($this->nodes[$this->total - $this->end_size]))
+        $this->nodes[$this->total - $this->end_size] = $this->_get_node($this->total - $this->end_size, 'dots');
+    }
+    
+    /** add prev and next nodes */
+    if($this->prev_next == true)
+    {
+      $this->nodes[0] = $this->_get_node($this->current - 1, 'arrow');
+      $this->nodes[$this->total + 1] = $this->_get_node($this->current + 1, 'arrow');
+    }
+    
+    /** add current page */
+    $this->nodes[$this->current] = $this->_get_node($this->current, 'current');
+
+    /* order the array */
+    ksort($this->nodes);    
   }
-
-  protected function _get_current_item()
+  
+  public function _get_node($page, $type = 'page')
   {
-    if(!is_array($this->menu_items)) return;
-
-    /** set default return */
-    $node = false;
-
-    foreach ($this->menu_items as $item)
+    $url = $this->base . str_replace('%#%', $page, $this->format);
+    
+    switch ($type)
     {
-      if( $item->url == $this->self_url )
-      {
-        $node = new stdClass();
+      case 'current':
+        $text  = $page;
+        $class = 'current';
+        break;
 
-        $node->title  = $item->title;
-        $node->url    = $item->url;
-        $node->parent = $item->menu_item_parent;
-        $node->alt    = __('Reload current page');
+      case 'dots' :
+        $text  = '&hellip;';
+        $class = 'unavailable';
+        $url   = '';
+        break;
 
-        return $node;
-      }
+      case 'arrow' :
+        $text  = $page == $this->current-1 ? $this->prev_text : $this->next_text;
+
+        if($page == 0 || $page == $this->total+1)
+        {
+          $class = 'arrow unavailable';
+          $url = '';
+        }
+        else
+        {
+          $class = 'arrow';
+        }
+        break;
+
+      default:
+        $text  = $page;
+        $class = null;
+        break;
     }
-
-    return $node;
-  }
-
-  protected function _get_parent_item($_parent)
-  {
-    // set default return
-    $node = false;
-
-    foreach ($this->menu_items as $item)
-    {
-      if( $item->ID == $_parent )
-      {
-        $node = new stdClass();
-
-        $node->title  = $item->title;
-        $node->url    = $item->url;
-        $node->parent = $item->menu_item_parent;
-        $node->alt    = sprintf(__('Go to %s'), $item->title);
-
-        return $node;
-      }
-    }
-    return $node;
+    
+    return array('text'  => $text,
+                 'class' => $class,
+                 'url'   => $url);
   }
 
   public function render()
   {
-    /** open tag */
-    $this->html = str_get_html('<ul class="breadcrumbs"></ul>');
-
-    /** define breadcrumb id */
-    if(!empty($this->attr['id']))
-      $this->html->find('ul', 0)->id = $this->attr['id'];
-    
-    if(empty($this->nodes) && current_user_can('edit_theme_options')) {
-      $str = str_get_html("<li><a href=\"#\" alt=\"\">".__('Hey, the indicated menu is empty or does not exists!')."</a></li>");
-      $this->html->find('ul', 0)->innertext .= $str;
-    }
-
-    foreach ($this->nodes as $node)
+    if(!empty($this->nodes))
     {
-      $str = str_get_html("<li><a href=\"{$node->url}\" alt=\"{$node->alt}\">{$node->title}</a></li>");
+      $this->html = str_get_html('<ul class="pagination"></ul>'); 
 
-      if( $str->find('a[href=#]') )
-        $str->find('a[href=#]', 0)->parent()->class = 'unavailable';
+      foreach ($this->nodes as $node)
+      {
+        $class = !is_null($node['class']) ? " class=\"{$node['class']}\"" : '';
+        $item = "<li{$class}><a href=\"{$node['url']}\">{$node['text']}</a></li>";
 
-      $this->html->find('ul', 0)->innertext .= $str;
+        $this->html->find('ul', 0)->innertext .= $item;
+      }
+      
+      /** set as centered */
+      if($this->centered == true)
+      {
+        $this->html = '<div class="pagination-centered">' . $this->html->outertext . '<div>';
+      }
     }
 
-    /** reload parser */
-    $this->html = str_get_html($this->html);
-    $this->html->find('li', -1)->class = 'current';
-
-    /** print */
     echo $this->html;
   }
 }
