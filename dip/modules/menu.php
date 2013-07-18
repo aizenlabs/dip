@@ -49,7 +49,8 @@ class DP_Menu
     $this->root        = isset( $_params['root'] ) ? $_params['root'] : false;
     $this->dropdown    = isset( $_params['dropdown'] ) ? $_params['dropdown'] : false;
 
-    $this->self_url    = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    $protocol          = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
+    $this->self_url    = $protocol . preg_replace('/\?.*/', '', $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] );
     $this->parent_url  = $post->post_parent ? get_permalink( $post->post_parent ) : null;
 
     $this->html        = null;

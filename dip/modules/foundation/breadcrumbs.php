@@ -38,7 +38,8 @@ class DP_Foundation_Breadcrumbs
       $this->menu_name = $_menu;
     }
 
-    $this->self_url   = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    $protocol         = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
+    $this->self_url   = $protocol . preg_replace('/\?.*/', '', $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] );
     $this->menu_items = wp_get_nav_menu_items($this->menu_name);    
     $this->nodes      = array();
 

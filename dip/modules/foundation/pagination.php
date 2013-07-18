@@ -50,8 +50,8 @@ class DP_Foundation_Pagination
     $this->mid_size     = isset($args['mid_size']) ? $args['mid_size'] : 2;
 
     $this->prev_next    = isset($args['prev_next']) ? $args['prev_next'] : true;
-    $this->prev_text    = isset($args['prev_text']) ? $args['prev_text'] : '&laquo';
-    $this->next_text    = isset($args['next_text']) ? $args['next_text'] : '&raquo';
+    $this->prev_text    = isset($args['prev_text']) ? $args['prev_text'] : __('« Previous');
+    $this->next_text    = isset($args['next_text']) ? $args['next_text'] : __('Next »');
 
     $this->centered     = isset($args['centered']) ? $args['centered'] : true;
     
