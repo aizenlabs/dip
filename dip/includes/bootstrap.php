@@ -9,6 +9,7 @@
 
 class DP_Bootstrap
 {
+  public $site;
   public $theme;
   public $config;
   public $modules;
@@ -25,6 +26,10 @@ class DP_Bootstrap
 
     /** run the router to redirect pages */
     $this->_run_router();
+    
+    /** get site info */
+    $this->site = new stdClass;
+    $this->site->permalink = get_option('permalink_structure');
 
     /** get all theme info */
     $this->theme = wp_get_theme();

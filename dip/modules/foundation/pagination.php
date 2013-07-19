@@ -35,16 +35,16 @@ class DP_Foundation_Pagination
 
   public function  __construct($args)
   {
-    global $wp_query;
+    global $dip, $wp_query;
 
     $protocol           = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
-    $this->base         = $protocol . preg_replace('/\?.*/', '', $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] );
-    
-    $this->format       = isset($args['format']) ? $args['format'] : '?page=%#%';
+    $this->base         = $protocol . preg_replace('/(page.*|\?.*)/', '', $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] );
+
+    $this->format       = $dip->site->permalink ? 'page/%#%/' : '?page=%#%';
     $this->search       = get_query_var('s') ? get_query_var('s') : false;
 
     $this->total        = $wp_query->max_num_pages;
-    $this->current      = get_query_var('page') ? (int)get_query_var('page') : 1;
+    $this->current      = get_query_var('paged') ? (int)get_query_var('paged') : 1;
 
     $this->end_size     = isset($args['end_size']) ? $args['end_size'] : 1;
     $this->mid_size     = isset($args['mid_size']) ? $args['mid_size'] : 2;
