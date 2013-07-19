@@ -41,6 +41,7 @@ class DP_Bootstrap
   public function start()
   {
     $this->_init_supports();
+    $this->_init_filters();
     $this->_load_modules();
     $this->_call_hooks();
   }
@@ -120,6 +121,12 @@ class DP_Bootstrap
         register_sidebar($args);
       }  
     }  
+  }
+
+  protected function _init_filters()
+  {
+    if(isset($this->config['excerpt_lenght']) && is_int($this->config['excerpt_lenght']))
+      add_filter('excerpt_length', create_function('', 'global $dip; return $dip->config[\'excerpt_lenght\'];'), 999);
   }
 
   protected function _load_modules()
