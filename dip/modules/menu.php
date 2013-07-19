@@ -51,7 +51,9 @@ class DP_Menu
 
     $protocol          = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
     $this->self_url    = $protocol . preg_replace('/(page.*|\?.*)/', '', $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] );
-    $this->parent_url  = $post->post_parent ? get_permalink( $post->post_parent ) : null;
+    
+    if(isset($post->post_parent))
+      $this->parent_url  = $post->post_parent ? get_permalink( $post->post_parent ) : null;
 
     $this->html        = null;
     $this->nodes       = array();
