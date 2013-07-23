@@ -44,8 +44,15 @@ class DP_Taxonomy
     $this->object_type    = !empty($prop->object_type) ? $prop->object_type : '';
 
     /** populate config arrays, if labels and args isn't defined the method will ignore it */
-    $this->set_labels($prop->labels);
-    $this->set_args($prop->args);
+    if(isset($prop->labels))
+      $this->set_labels($prop->labels);
+    else
+      $this->set_labels();
+
+    if(isset($prop->args))
+      $this->set_args($prop->args);
+    else
+      $this->set_args();
 
     /** call WordPress hooks to register the new Taxonomy */
     add_action('init', array($this, 'register_taxonomy'));
@@ -65,7 +72,7 @@ class DP_Taxonomy
    * @param array $custom
    * @return void
    */
-  public function set_labels($custom)
+  public function set_labels($custom = array())
   {
     /** generate default labels */
     $defaults = array(
@@ -90,7 +97,7 @@ class DP_Taxonomy
    * @param array $custom
    * @return void
    */
-  public function set_args($custom)
+  public function set_args($custom = array())
   {
     /** set default args */
     $defaults = array(
