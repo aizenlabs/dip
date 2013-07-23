@@ -58,8 +58,8 @@ abstract class DP_Panel
     $this->settings = get_option($this->namespace);
 
     /** call WordPress hooks */
-    add_action('admin_menu', array(&$this, 'register_panel'));
-    add_action('admin_enqueue_scripts', array(&$this, 'enqueue_scripts'));
+    add_action('admin_menu', array($this, 'register_panel'));
+    add_action('admin_enqueue_scripts', array($this, 'enqueue_scripts'));
   }
 
   /**
@@ -79,10 +79,10 @@ abstract class DP_Panel
     if($this->parent == false) {
       add_menu_page($this->name, $this->name, $this->capability, $this->namespace, array($this, 'panel_view'), '', $this->position);
     } else {
-      add_submenu_page($this->parent, $this->name, $this->name, $this->capability, $this->namespace, array(&$this, 'panel_view'));
+      add_submenu_page($this->parent, $this->name, $this->name, $this->capability, $this->namespace, array($this, 'panel_view'));
     }
 
-    add_action('admin_init', array(&$this, 'register_setting'));
+    add_action('admin_init', array($this, 'register_setting'));
   }
 
   /**

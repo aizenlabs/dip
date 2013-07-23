@@ -18,8 +18,8 @@ class DP_Foundation
     $this->_includes();
     
     if(is_admin() || is_login_page()) return;
-    add_action('init', array(&$this, '_load_assets'));
-    add_action('wp_footer', array(&$this, '_load_jslib'));
+    add_action('init', array($this, '_load_assets'));
+    add_action('wp_footer', array($this, '_load_jslib'));
   }
 
   protected function _includes()

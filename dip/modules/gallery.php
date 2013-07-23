@@ -145,7 +145,7 @@ class DP_Helper_Gallery
     }
 
     // call scripts
-    add_action( 'wp_footer', array(&$this, '_init_script') );
+    add_action( 'wp_footer', array($this, '_init_script') );
 
     // print
     $this->html->find('div.gallery', 0)->innertext .= '<br style="clear: both;" />';

@@ -54,7 +54,7 @@ class DP_Bootstrap
   protected function _run_router()
   {
     if($this->routes)
-      add_action('template_redirect', array(&$this, '_set_router'));
+      add_action('template_redirect', array($this, '_set_router'));
     else
       return false;
   }
@@ -96,10 +96,10 @@ class DP_Bootstrap
   {
     if(is_admin()) {
       /** wp-admin hooks */
-      add_action('admin_print_styles', array(&$this->ui, 'apply'));
+      add_action('admin_print_styles', array($this->ui, 'apply'));
     } else {
       /** theme hooks */
-      add_action('init', array(&$this, '_load_scripts'));
+      add_action('init', array($this, '_load_scripts'));
     }
   }
 

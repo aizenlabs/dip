@@ -40,12 +40,12 @@ abstract class DP_PostType
     $this->set_args();
 
     /** call WordPress hooks */
-    add_action('init', array(&$this, 'register_post_type'));
+    add_action('init', array($this, 'register_post_type'));
 
     /** don't call this hooks outside of wp-admin */
     if(!is_admin()) return;
-    add_action('add_meta_boxes', array( &$this, 'add_meta_boxes'));
-    add_action('save_post', array( &$this, 'save_meta_data'));
+    add_action('add_meta_boxes', array($this, 'add_meta_boxes'));
+    add_action('save_post', array($this, 'save_meta_data'));
   }
 
   /**
@@ -77,11 +77,11 @@ abstract class DP_PostType
 
     /** if is setted, customize title placeholder */
     if(isset($this->args['title_placeholder']) && $is_edit)
-      add_filter('enter_title_here', array(&$this, '_filter_title_placeholder'), 10, 2);
+      add_filter('enter_title_here', array($this, '_filter_title_placeholder'), 10, 2);
 
     /** option to remove the slug metabox */
     if(isset($this->args['no_slug_meta_box']) && $is_edit)
-      add_action('admin_head', array(&$this, '_remove_slug_meta_box'));
+      add_action('admin_head', array($this, '_remove_slug_meta_box'));
   }
 
   /**
@@ -147,7 +147,7 @@ abstract class DP_PostType
   public function add_meta_boxes()
   {
     /** list all methods */
-    $methods = get_class_methods(&$this);
+    $methods = get_class_methods($this);
 
     /** search defined meta boxes */
     foreach($methods as $i=>$method)
@@ -159,7 +159,7 @@ abstract class DP_PostType
         $title = __(ucfirst(str_replace('_', ' ', $id)));
         
         /** register the meta box */
-        add_meta_box($id, $title, array(&$this, $method), $this->post_type, 'normal', 'high');
+        add_meta_box($id, $title, array($this, $method), $this->post_type, 'normal', 'high');
       }
     }
 
@@ -273,8 +273,8 @@ abstract class DP_PostType
 
       bp_blogs_record_activity( array(
         'user_id'           => $user_id,
-        'action'            => apply_filters('bp_blogs_activity_new_post_action', $activity_action, &$post, $post_permalink),
-        'content'           => apply_filters('bp_blogs_activity_new_post_content', $activity_content, &$post, $post_permalink),
+        'action'            => apply_filters('bp_blogs_activity_new_post_action', $activity_action, $post, $post_permalink),
+        'content'           => apply_filters('bp_blogs_activity_new_post_content', $activity_content, $post, $post_permalink),
         'primary_link'      => apply_filters('bp_blogs_activity_new_post_primary_link', $post_permalink, $post_id),
         'type'              => 'new_'.$this->post_type,
         'item_id'           => $blog_id,

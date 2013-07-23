@@ -48,7 +48,7 @@ class DP_Taxonomy
     $this->set_args($prop->args);
 
     /** call WordPress hooks to register the new Taxonomy */
-    add_action('init', array(&$this, 'register_taxonomy'));
+    add_action('init', array($this, 'register_taxonomy'));
   }
 
   /**

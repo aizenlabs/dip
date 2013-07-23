@@ -94,7 +94,7 @@ class DP_Helper_Gmaps
 
     // instance API script
     add_action( 'wp_footer', create_function($args, "wp_enqueue_script('google-maps');") );
-    add_action( 'wp_footer', array(&$this, '_init_script') );
+    add_action( 'wp_footer', array($this, '_init_script') );
   }
 
   private function _process_static()
