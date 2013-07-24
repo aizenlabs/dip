@@ -139,7 +139,7 @@ class DP_Bootstrap
     if(!is_array($this->modules)) return;
     foreach($this->modules as $module=>$args)
     {
-      if($args === true)
+      if($args === true || is_array($args))
       {
         $filename = stream_resolve_include_path("modules/{$module}.php") ? "modules/{$module}.php" : "modules/{$module}/{$module}.php";
         include_once($filename);
