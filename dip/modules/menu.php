@@ -164,8 +164,11 @@ class DP_Menu
       $node_html->find('li', 0)->class = implode(' ', array_reverse($node->classes));
 
       // append node to html
-      $this->html->find('.nth-'.$_parent, 0)->innertext .= $node_html;
-      $this->html = str_get_html($this->html); // reload parse
+      if($this->html->find('.nth-'.$_parent, 0) != null)
+      {
+        $this->html->find('.nth-'.$_parent, 0)->innertext .= $node_html;
+        $this->html = str_get_html($this->html); // reload parse
+      }
 
       $this->_render_node($node->id);
     }
