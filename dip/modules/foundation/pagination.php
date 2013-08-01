@@ -163,7 +163,7 @@ class DP_Foundation_Pagination
       /** set as centered */
       if($this->centered == true)
       {
-        $this->html = '<div class="pagination-centered">' . $this->html->outertext . '<div>';
+        $this->html = '<div class="pagination-centered">' . $this->html->outertext . '</div>';
       }
     }
 
