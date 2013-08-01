@@ -107,7 +107,7 @@ class DP_Helper_Gmaps
       $this->html->find('img', 0)->id = $this->attr['id'];
 
     // build img src
-    $request = "?center={$this->center}&zoom={$this->zoom}&size={$this->width}x{$this->height}&markers=color:red|{$this->center}&sensor=false";
+    $request = "?center={$this->center}&zoom={$this->zoom}&size={$this->width}x{$this->height}&markers=color:red|{$this->center}&sensor=false&scale=4";
     $this->html->find('img', 0)->src = $this->static_src . $request;
 
     // set alt text
