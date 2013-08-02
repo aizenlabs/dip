@@ -23,3 +23,19 @@ if(!function_exists('_p')) {
       echo $mixed[$key];
   }
 }
+
+if(!function_exists('_r')) {
+  /**
+   * Check if array key isset and return the value
+   * @param mixed $mixed
+   * @param string $key
+   * @return void
+   */
+  function _r($mixed, $key = null)
+  {
+    if(!is_array($mixed))
+      return $mixed;
+    elseif(isset($mixed[$key]))
+      return $mixed[$key];
+  }
+}
