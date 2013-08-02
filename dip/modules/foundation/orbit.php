@@ -9,6 +9,9 @@
  * @since Dip Framework 1.0
  */
 
+global $dip;
+$orbit = _r($dip->modules['foundation'], 'orbit');
+
 // template functions
 function dp_orbit($_id = null, $_params = array())
 {
@@ -65,7 +68,7 @@ class DP_Foundation_Orbit
 }
 
 /** load panel only in wp-admin */
-if(!is_admin()) return;
+if(!is_admin() || (isset($orbit['show-panel']) && $orbit['show-panel'] != true)) return;
 new DP_Panel_Orbit;
 
 class DP_Panel_Orbit extends DP_Panel
