@@ -10,6 +10,7 @@
 abstract class DP_Panel
 {
   public $name;
+  public $menu_title;
   public $namespace;
   public $module;
   public $settings;
@@ -35,6 +36,7 @@ abstract class DP_Panel
     $this->init();
     
     /** fill necessary attributes if is null */
+    if(is_null($this->menu_title)) $this->menu_title = $this->name;
     if(is_null($this->module)) $this->module = $this->namespace;
     if($this->tabs && is_null($this->current_tab)) $this->current_tab = isset($_GET['tab']) ? $_GET['tab'] : current(array_keys($this->tabs));
     
@@ -77,9 +79,9 @@ abstract class DP_Panel
    // add_menu_page( 'custom menu title', 'custom menu', 'manage_options', 'myplugin/myplugin-admin.php', '', , 6 );
     /** register panel in admin menu */
     if($this->parent == false) {
-      add_menu_page($this->name, $this->name, $this->capability, $this->namespace, array($this, 'panel_view'), '', $this->position);
+      add_menu_page($this->name, $this->menu_title, $this->capability, $this->namespace, array($this, 'panel_view'), '', $this->position);
     } else {
-      add_submenu_page($this->parent, $this->name, $this->name, $this->capability, $this->namespace, array($this, 'panel_view'));
+      add_submenu_page($this->parent, $this->name, $this->menu_title, $this->capability, $this->namespace, array($this, 'panel_view'));
     }
 
     add_action('admin_init', array($this, 'register_setting'));
