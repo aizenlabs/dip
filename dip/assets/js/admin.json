@@ -1,0 +1,156 @@
+{
+  "default_icons":{
+    "dashboard": {
+      "full": "-137px -5px",
+      "menu": "-59px -33px",
+      "hover": "-59px -1px"
+    },
+    "posts": {
+      "full": "-552px -5px",
+      "menu": "-269px -33px",
+      "hover": "-269px -1px"
+    },
+    "media": {
+      "full": "-251px -5px",
+      "menu": "-119px -33px",
+      "hover": "-119px -1px"
+    },
+    "links": {
+      "full": "-492px -5px",
+      "menu": "-239px -33px",
+      "hover": "-239px -1px"
+    },
+    "pages": {
+      "full": "-312px -5px",
+      "menu": "-149px -33px",
+      "hover": "-149px -1px"
+    },
+    "comments": {
+      "full": "-72px -5px",
+      "menu": "-29px -33px",
+      "hover": "-29px -1px"
+    },
+    "themes": {
+      "full": "-11px -5px",
+      "menu": "1px -33px",
+      "hover": "1px -1px"
+    },
+    "plugins": {
+      "full": "-370px -5px",
+      "menu": "-179px -33px",
+      "hover": "-179px -1px"
+    },
+    "users": {
+      "full": "-600px -5px",
+      "menu": "-300px -33px",
+      "hover": "-300px -1px"
+    },
+    "tools": {
+      "full": "-432px -5px",
+      "menu": "-209px -33px",
+      "hover": "-209px -1px"
+    },
+    "general": {
+      "full": "-492px -5px",
+      "menu": "-239px -33px",
+      "hover": "-239px -1px"
+    },
+    "keys": {
+      "full": "-492px -5px",
+      "menu": "-239px -33px",
+      "hover": "-239px -1px"
+    },
+    "options": {
+      "full": "-492px -5px",
+      "menu": "-239px -33px",
+      "hover": "-239px -1px"
+    }
+  },
+  "custom_icons":{
+    "audio": {
+      "full": "-29px -30px",
+      "menu": "-31px -175px",
+      "hover": "-31px -207px"
+    },
+    "star": {
+      "full": "-29px -98px",
+      "menu": "-31px -273px",
+      "hover": "-31px -305px"
+    },
+    "mobile": {
+      "full": "-82px -31px",
+      "menu": "-86px -175px",
+      "hover": "-86px -207px"
+    },
+    "clipboard": {
+      "full": "-82px -96px",
+      "menu": "-87px -273px",
+      "hover": "-87px -305px"
+    },
+    "bookmark": {
+      "full": "-139px -30px",
+      "menu": "-144px -175px",
+      "hover": "-144px -207px"
+    },
+    "box": {
+      "full": "-139px -96px",
+      "menu": "-144px -273px",
+      "hover": "-144px -305px"
+    },
+    "locationpin": {
+      "full": "-196px -30px",
+      "menu": "-199px -175px",
+      "hover": "-199px -207px"
+    },
+    "calendar": {
+      "full": "-196px -96px",
+      "menu": "-199px -273px",
+      "hover": "-199px -305px"
+    },
+    "jamjar": {
+      "full": "-251px -30px",
+      "menu": "-256px -175px",
+      "hover": "-256px -207px"
+    },
+    "buddy": {
+      "full": "-251px -96px",
+      "menu": "-256px -273px",
+      "hover": "-256px -305px"
+    },
+    "pound": {
+      "full": "-308px -30px",
+      "menu": "-312px -175px",
+      "hover": "-312px -207px"
+    },
+    "magazine": {
+      "full": "-308px -96px",
+      "menu": "-312px -273px",
+      "hover": "-312px -305px"
+    },
+    "folder": {
+      "full": "-365px -30px",
+      "menu": "-369px -175px",
+      "hover": "-369px -207px"
+    },
+    "book": {
+      "full": "-365px -96px",
+      "menu": "-369px -273px",
+      "hover": "-369px -305px"
+    },
+    "rectangles": {
+      "full": "-422px -30px",
+      "menu": "-424px -175px",
+      "hover": "-424px -207px"
+    },
+    "pencil": {
+      "full": "-422px -96px",
+      "menu": "-424px -273px",
+      "hover": "-424px -305px"
+    },
+    "mortarboard": {
+      "full": "-478px -30px",
+      "menu": "-480px -175px",
+      "hover": "-480px -207px"
+    }
+  }
+}

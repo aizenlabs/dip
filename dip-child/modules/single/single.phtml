@@ -1,0 +1,21 @@
+<?php
+    /** show update message */
+    if (esc_attr($_GET['updated']) == 'true')
+      printf('<div class="updated"><p><strong>'.__('%1$s updated', 'dip').'</strong></p></div>', $this->name);
+
+    /** open form */
+    echo '<form method="post" action="">';
+
+    /** generate nonce field */
+    settings_fields($this->namespace);
+    
+    echo 'aaaaaaaaaa';
+    
+    /** print the form buttons */
+    echo '<p class="submit" style="clear: both;">
+           <input type="submit" name="save"  class="button-primary" value="'.__('Save').'" />
+          </p>';
+    
+    /** close form */
+    echo '</form>';
+    

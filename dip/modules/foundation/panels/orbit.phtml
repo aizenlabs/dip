@@ -1,0 +1,37 @@
+<?php 
+$slides = !empty($this->settings['slides']) ? $this->settings['slides'] : array(1 => array('image'=>'', 'desc'=>'')); ?>
+<form method="post" action="">
+  <?php settings_fields($this->namespace); ?>
+  <?php foreach ($slides as $i=>$slide) : ?>
+  <div class="orbit-form" data-index="<? echo $i ?>">
+    <h3>Slide #<? echo $i ?></h3>
+    <table class="form-table">
+      <tr valign="top">
+        <th scope="row"><label>Image:</label></th>
+        <td>
+          <input type="url" name="slide[<? echo $i ?>][image]" value="<? echo $slide['image'] ?>" class="regular-text" />
+          <button type="button" class="image-upload button-secondary">Upload Image</button>
+          <br />
+          <span class="description">Image should be over 425px wide to fit in all layout options as the site resizes.</span>
+        </td>
+      </tr>
+  
+      <tr valign="top">
+        <th scope="row"><label>Description:</label></th>
+        <td>
+          <textarea name="slide[<? echo $i ?>][desc]" cols="60" rows="3"><? echo $slide['desc'] ?></textarea>
+          <br />
+          <span class="description">The description will be viewed below the picture.</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <?php endforeach; ?>
+  
+  <br />
+  <input type="button" id="orbit-add" value="+ New slide" class="button">
+  
+  <p class="submit" style="clear: both;">
+    <input type="submit" name="save"  class="button-primary" value="<?php _e('Save', 'dip'); ?>" />
+  </p>
+</form>

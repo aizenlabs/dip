@@ -1,0 +1,96 @@
+/*
+Theme Name: Dip Framework
+Theme URI: http://aizenlabs.github.io/dip
+Author: Zenture
+Author URI: http://labs.aizen.co
+Description: This is a modular framework to help designers extend the WordPress functions
+Version: 1.0.0
+License: GNU General Public License
+License URI: license.txt
+Tags: Framework, Clean, Starter, Powerfull
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+
+Our templates are based on Foundation, by Zurb http://foundation.zurb.com
+
+*/
+
+/* Global
+----------------------------------------------- */
+html { background-color: #2f2f2f; }
+body { color: #333; background-color: #fff; }
+h1, h2, h3, h4, h5, h6,
+ul, p, input, button, .button { font-weight: 300; }
+
+/* Foundation */
+.top-bar-section ul li > a, .top-bar-section .dropdown li a  { font-weight: 300; }
+
+.orbit-slide-number, .orbit-timer { display: none; }
+.orbit-bullets  { text-align: center; }
+.orbit-bullets li { float: none; display: inline-block; border: none; width: 14px; height: 14px; margin-right: 9px; }
+
+/* WordPress */
+.widget, .widget > ul { list-style: none; margin-left: 0; }
+.widgettitle { font-weight: 300; font-size: 1.1em; }
+
+.entry-meta { background-color: #F6F6F6; border: 1px #DCDCDC solid; border-radius: 3px; padding: 0.5em 0.85em;
+              font-size: .8em; font-weight: 300; line-height: 1.2em; }
+
+.comments-title { font-size: 1.5em; margin-top: 1.3em; }
+.comment-list { list-style: none; }
+
+.comment-meta { margin-bottom: .5em; *zoom:1; }
+.comment-meta:before, .comment-meta:after { content: " "; display: table; }
+.comment-meta:after { clear: both; }
+.comment-author-avatar { float: left; margin-right: .5em; }
+.comment-author .fn,
+.comment-metadata { font-style: normal; font-weight: 300; line-height: 1em; }
+.comment-metadata { font-size: .75em; }
+.comment-author .says { display: none; }
+.vcard.comment-author, .vcard.author { border: none; padding: 0; margin: 0; }
+
+.comment-content p { margin-bottom: .3em; }
+.comment-content .comment-reply-link { visibility: hidden; font-size: .9em; }
+.comment-content:hover .comment-reply-link { visibility: visible; }
+
+#commentform label { font-weight: 300; }
+.logged-in-as { float: right; font-size: .8em; margin-bottom: .1em; }
+.form-allowed-tags { font-size: .75em; }
+
+.form-submit input { display: inline-block; background-color: #2BA6CB; border: 1px #2284A1 solid; border-radius: 3px;
+                     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset; transition: background-color 300ms ease-out 0s;
+                     color: white; font-size: .9em; padding: 0.75em 1.5em 0.8125em; line-height: 1; margin: 0 0 1.25em; }
+
+/* Templates */
+.not-found { text-align: center; padding: 3em 0 7em; }
+
+/* Header
+----------------------------------------------- */
+#header { background-color: #2BA6CB; padding: .4em 0; margin-bottom: 2em; }
+#header hgroup h1 { font-size: 2em; font-weight: 300; line-height: 2.1em; padding-left: .5em; white-space: nowrap; }
+#header hgroup h2 { font-size: 1.3em; line-height: 3.5em; text-align: right; }
+#header hgroup h1 a, #header hgroup h2 { color: #fff; }
+#header nav { margin-bottom: .5em; }
+
+/* Orbit 
+----------------------------------------------- */
+.orbit-bullets li { background-color: #eee; }
+.orbit-bullets li.active { background-color: #2BA6CB; }
+
+/* Pages
+----------------------------------------------- */
+#main, #sidebar { margin-bottom: 2.3em; }
+#sidebar { margin-top: 5.3em; padding-left: 1.5em; }
+
+/* Footer
+----------------------------------------------- */
+#footer-widgets { background-color: #eee; border-top: 1px solid #DFDFDF; padding: 2em 0 1.5em; }
+#footer-widgets .row > * { font-size: .9em; }
+#footer { background-color: #2f2f2f; color: #999; padding: .7em 0 0; }
+#footer a { color: #bbb; }
+#footer ul, #footer p { font-size: .8em; margin-bottom: .7em; }
+
+@media only screen and (min-width: 768px) {
+  #footer ul { float: right; }
+}
