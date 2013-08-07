@@ -81,6 +81,7 @@ class DP_Bootstrap
     // Module classes
     require_once('post-type.php');
     require_once('taxonomy.php');
+    require_once('user-role.php');
 
     // 
     if(is_admin()) {
