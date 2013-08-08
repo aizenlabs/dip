@@ -8,7 +8,7 @@
  * @since Dip Framework 1.0
 */
 
-if(is_admin() || $_SERVER['REQUEST_METHOD'] != "POST" || !wp_verify_nonce($_POST['_wpnonce'], 'sendmail')) return;
+if(is_admin() || $_SERVER['REQUEST_METHOD'] != "POST" || !(isset($_POST['_wpnonce']) && wp_verify_nonce($_POST['_wpnonce'], 'sendmail'))) return;
 
 global $dip;
 $config = $dip->modules['sendmail'];
