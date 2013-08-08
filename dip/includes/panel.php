@@ -130,7 +130,7 @@ abstract class DP_Panel
 
     /** include file view or show the error */
     $filename = $this->get_panel_view_filename();
-    if((include $filename) === false) 
+    if(empty($filename) || (include $filename) === false)
     {
       printf('<p>'.__('You need create the panel view!'.'</p>', 'dip'));
       return;
