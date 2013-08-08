@@ -88,6 +88,7 @@ class DP_Bootstrap
       require_once('panel.php');
       require_once('ui.php');
       require_once('user-role.php');
+      require_once('list-table.php');
     } else {
       require_once('helpers/template-tags.php');
     } 
