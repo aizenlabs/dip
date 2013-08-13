@@ -23,6 +23,8 @@ abstract class DP_Panel
   public $tabs        = false;
   public $current_tab;
 
+  public $add_action  = null;
+
   /**
    * Call init method and create new Panel
    * @return DP_Panel self-object
@@ -76,7 +78,6 @@ abstract class DP_Panel
    */
   public function register_panel()
   {
-   // add_menu_page( 'custom menu title', 'custom menu', 'manage_options', 'myplugin/myplugin-admin.php', '', , 6 );
     /** register panel in admin menu */
     if($this->parent == false) {
       add_menu_page($this->name, $this->menu_title, $this->capability, $this->namespace, array($this, 'panel_view'), '', $this->position);
@@ -183,7 +184,8 @@ abstract class DP_Panel
   {
     screen_icon($this->namespace);
 
-    if($this->tabs) {
+    if($this->tabs)
+    {
       echo '<h2 class="nav-tab-wrapper">';
       foreach ($this->tabs as $key => $label)
       {
@@ -191,8 +193,19 @@ abstract class DP_Panel
         printf('<a class="nav-tab%s" href="%s">%s</a>', $class, $this->get_panel_uri($key), $label);
       }
       echo '</h2>';
-    } else {
-      echo '<h2>'.$this->name.'</h2>';
+    }
+    elseif(!empty($this->add_action))
+    {
+      printf(
+        '<h2>%s <a href="%s" class="add-new-h2">%s</a></h2>',
+        esc_html__($this->name),
+        esc_url(admin_url($this->add_action)),
+        esc_html__('Add New', 'dip')
+      );
+    }
+    else
+    {
+      printf('<h2>%s</h2>', esc_html__($this->name));
     }
   }  
 }
