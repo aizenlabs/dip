@@ -177,10 +177,12 @@ abstract class DP_Panel
   /**
    * Print panel header: tabs or single title
    * @return void
+   * @uses screen_icon() http://codex.wordpress.org/Function_Reference/screen_icon
    */
   public function panel_header()
-  {    
-    echo '<div id="icon-'.$this->namespace.'" class="icon32 icon-generic"><br /></div>';
+  {
+    screen_icon($this->namespace);
+
     if($this->tabs) {
       echo '<h2 class="nav-tab-wrapper">';
       foreach ($this->tabs as $key => $label)
