@@ -7,14 +7,11 @@
  * @since 1.1.0
  */
 
-abstract class DP_UserRole extends DP_Panel
+abstract class DP_UserRole
 {
   public $role;
-
+  public $name;
   public $capabilities = array();
-
-  public $showpanel;
-  public $users;
 
   /**
    * Call init method and create new Post-Type
@@ -27,9 +24,6 @@ abstract class DP_UserRole extends DP_Panel
     /** call WordPress hooks */
     add_action('switch_theme', array($this, 'add_user_role'));
     add_action('after_switch_theme', array($this, 'remove_user_role'));
-    
-    if($this->showpanel == true) parent::__construct();
-
   }
 
   /**
@@ -48,10 +42,5 @@ abstract class DP_UserRole extends DP_Panel
   public function remove_user_role()
   {
     remove_role($this->role);
-  }
-
-  public function get_users()
-  {
-    $this->users = get_users(array('role' => $this->role));
   }
 }
