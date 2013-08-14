@@ -227,12 +227,13 @@ abstract class DP_Panel
   /**
    * Actions to be taken prior to page loading. This is after headers have been set.
    * @uses load-$hook
+   * @since 1.1.0
    */
   public function allow_meta_boxes()
   {
     /* Trigger the add_meta_boxes hooks to allow meta boxes to be added */
-    do_action('add_meta_boxes_'.$screen_id, null);
-    do_action('add_meta_boxes', $screen_id, null);
+    do_action('add_meta_boxes_'.$this->screen_id, null);
+    do_action('add_meta_boxes', $this->screen_id, null);
 
     /* Enqueue WordPress' script for handling the meta boxes */
     wp_enqueue_script('postbox');
@@ -241,7 +242,10 @@ abstract class DP_Panel
     add_screen_option('layout_columns', array('max' => 2, 'default' => 2) );
   }
 
-  /* Prints script in footer. This 'initialises' the meta boxes */
+  /**
+   * Prints script in footer. This 'initialises' the meta boxes
+   * @since 1.1.0
+   */
   function print_meta_boxes_scripts()
   {
     echo '<script>jQuery(document).ready(function(){ postboxes.add_postbox_toggles(pagenow); });</script>';
@@ -250,6 +254,7 @@ abstract class DP_Panel
   /**
    * Automatic list and register defined meta boxes
    * @return void
+   * @since 1.1.0
    */
   public function add_meta_boxes()
   {
@@ -270,4 +275,5 @@ abstract class DP_Panel
       }
     }
   }
+
 }
