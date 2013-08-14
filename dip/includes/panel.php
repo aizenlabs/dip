@@ -100,6 +100,7 @@ abstract class DP_Panel
     }
     
     /* Init help tabs */
+    $this->add_screen_options();
     $this->add_help_tabs();
   }
 
@@ -241,6 +242,7 @@ abstract class DP_Panel
     /* Enqueue WordPress' script for handling the meta boxes */
     wp_enqueue_script('postbox');
 
+    if(method_exists($this, 'get_screen_options')) return;
     /* Add screen option: user can choose between 1 or 2 columns (default 2) */
     add_screen_option('layout_columns', array('max' => 2, 'default' => 2) );
   }
@@ -277,6 +279,26 @@ abstract class DP_Panel
         add_meta_box($id, $title, array($this, $method), $this->screen_id, 'normal', 'high');
       }
     }
+  }
+
+   /**
+   * Automatic add screen options
+   * @return void
+   * @since 1.1.0
+   */
+  public function add_screen_options()
+  {
+    if(!method_exists($this, 'get_screen_options')) return;
+    
+    /** 
+     * Create the WP_Screen object against your admin page handle
+     * This ensures we're working with the right admin page
+     */
+    $admin_screen = WP_Screen::get($this->screen_id);
+    $options = $this->get_screen_options();
+
+    foreach($options as $key=>$values)
+      $admin_screen->add_option($key, $values);
   }
 
   /**
