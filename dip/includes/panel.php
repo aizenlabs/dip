@@ -98,6 +98,9 @@ abstract class DP_Panel
 
       $this->add_meta_boxes();
     }
+    
+    /* Init help tabs */
+    $this->add_help_tabs();
   }
 
   /**
@@ -276,4 +279,26 @@ abstract class DP_Panel
     }
   }
 
+  /**
+   * Automatic list and register help tabs
+   * @return void
+   * @since 1.1.0
+   */
+  public function add_help_tabs()
+  {
+    if(!method_exists($this, 'get_help_tabs')) return;
+    
+    /** 
+     * Create the WP_Screen object against your admin page handle
+     * This ensures we're working with the right admin page
+     */
+    $admin_screen = WP_Screen::get($this->screen_id);
+    $help = $this->get_help_tabs();
+
+    foreach($help['tabs'] as $tab)
+      $admin_screen->add_help_tab($tab);
+
+    if(isset($help['sidebar']))
+      $admin_screen->set_help_sidebar($help['sidebar']);
+  }
 }
