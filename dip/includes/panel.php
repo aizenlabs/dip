@@ -95,6 +95,8 @@ abstract class DP_Panel
     {
       add_action('load-'.$this->screen_id, array($this, 'allow_meta_boxes'));
       add_action('admin_footer-'.$this->screen_id, array($this, 'print_meta_boxes_scripts'));
+
+      $this->add_meta_boxes();
     }
   }
 
@@ -243,5 +245,29 @@ abstract class DP_Panel
   function print_meta_boxes_scripts()
   {
     echo '<script>jQuery(document).ready(function(){ postboxes.add_postbox_toggles(pagenow); });</script>';
+  }
+  
+  /**
+   * Automatic list and register defined meta boxes
+   * @return void
+   */
+  public function add_meta_boxes()
+  {
+    /** list all methods */
+    $methods = get_class_methods($this);
+
+    /** search defined meta boxes */
+    foreach($methods as $i=>$method)
+    {
+      /** select meta box config method by pattern */
+      if(preg_match('/^_mb_.+$/', $method))
+      {
+        $id = preg_replace('/_mb_/', '', $method, 1);
+        $title = __(ucfirst(str_replace('_', ' ', $id)));
+        
+        /** register the meta box */
+        add_meta_box($id, $title, array($this, $method), $this->screen_id, 'normal', 'high');
+      }
+    }
   }
 }
