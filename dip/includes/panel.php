@@ -13,17 +13,20 @@ abstract class DP_Panel
   public $menu_title;
   public $namespace;
   public $module;
-  public $settings;
+  public $settings;  
 
-  public $parent      = 'themes.php';
-  public $capability  = 'edit_theme_options';
-  public $icon        = 'options';
-  public $position    = '100';
+  public $parent       = 'themes.php';
+  public $capability   = 'edit_theme_options';
+  public $icon         = 'options';
+  public $position     = '100';
 
-  public $tabs        = false;
+  public $tabs         = false;
   public $current_tab;
 
-  public $add_action  = null;
+  public $shortcut     = null;
+
+  public $screen_id;
+  public $metaboxes    = false;
 
   /**
    * Call init method and create new Panel
@@ -80,12 +83,19 @@ abstract class DP_Panel
   {
     /** register panel in admin menu */
     if($this->parent == false) {
-      add_menu_page($this->name, $this->menu_title, $this->capability, $this->namespace, array($this, 'panel_view'), '', $this->position);
+      $this->screen_id = add_menu_page($this->name, $this->menu_title, $this->capability, $this->namespace, array($this, 'panel_view'), '', $this->position);
     } else {
-      add_submenu_page($this->parent, $this->name, $this->menu_title, $this->capability, $this->namespace, array($this, 'panel_view'));
+      $this->screen_id = add_submenu_page($this->parent, $this->name, $this->menu_title, $this->capability, $this->namespace, array($this, 'panel_view'));
     }
 
     add_action('admin_init', array($this, 'register_setting'));
+
+    /* Add callbacks for this screen only. */
+    if($this->metaboxes)
+    {
+      add_action('load-'.$this->screen_id, array($this, 'allow_meta_boxes'));
+      add_action('admin_footer-'.$this->screen_id, array($this, 'print_meta_boxes_scripts'));
+    }
   }
 
   /**
@@ -194,18 +204,44 @@ abstract class DP_Panel
       }
       echo '</h2>';
     }
-    elseif(!empty($this->add_action))
+    elseif(!empty($this->shortcut))
     {
+      $label = isset($this->shortcut['label']) ? $this->shortcut['label'] : __('Add New');
+      $uri   = isset($this->shortcut['uri']) ? $this->shortcut['uri'] : $this->shortcut;
+
       printf(
         '<h2>%s <a href="%s" class="add-new-h2">%s</a></h2>',
-        esc_html__($this->name),
-        esc_url(admin_url($this->add_action)),
-        esc_html__('Add New', 'dip')
+        esc_html($this->name),
+        esc_url(admin_url($uri)),
+        esc_html($label)
       );
     }
     else
     {
       printf('<h2>%s</h2>', esc_html__($this->name));
     }
-  }  
+  }
+
+  /**
+   * Actions to be taken prior to page loading. This is after headers have been set.
+   * @uses load-$hook
+   */
+  public function allow_meta_boxes()
+  {
+    /* Trigger the add_meta_boxes hooks to allow meta boxes to be added */
+    do_action('add_meta_boxes_'.$screen_id, null);
+    do_action('add_meta_boxes', $screen_id, null);
+
+    /* Enqueue WordPress' script for handling the meta boxes */
+    wp_enqueue_script('postbox');
+
+    /* Add screen option: user can choose between 1 or 2 columns (default 2) */
+    add_screen_option('layout_columns', array('max' => 2, 'default' => 2) );
+  }
+
+  /* Prints script in footer. This 'initialises' the meta boxes */
+  function print_meta_boxes_scripts()
+  {
+    echo '<script>jQuery(document).ready(function(){ postboxes.add_postbox_toggles(pagenow); });</script>';
+  }
 }
