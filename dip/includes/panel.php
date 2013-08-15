@@ -88,7 +88,8 @@ abstract class DP_Panel
       $this->screen_id = add_submenu_page($this->parent, $this->name, $this->menu_title, $this->capability, $this->namespace, array($this, 'panel_view'));
     }
 
-    add_action('admin_init', array($this, 'register_setting'));
+    add_action('load-'.$this->screen_id, array($this, 'register_setting'));
+    add_action('load-'.$this->screen_id, array($this, 'do_request'));
 
     /* Add callbacks for this screen only. */
     if($this->metaboxes)
@@ -270,9 +271,9 @@ abstract class DP_Panel
     foreach($methods as $i=>$method)
     {
       /** select meta box config method by pattern */
-      if(preg_match('/^_mb_.+$/', $method))
+      if(preg_match('/^_meta_.+$/', $method))
       {
-        $id = preg_replace('/_mb_/', '', $method, 1);
+        $id = preg_replace('/_meta_/', '', $method, 1);
         $title = __(ucfirst(str_replace('_', ' ', $id)));
         
         /** register the meta box */
@@ -322,5 +323,33 @@ abstract class DP_Panel
 
     if(isset($help['sidebar']))
       $admin_screen->set_help_sidebar($help['sidebar']);
+  }
+  
+   /**
+   * Automatic call the related method after a form submit
+   * @return void
+   * @since 1.1.0
+   */
+  public function do_request()
+  {
+    if($_SERVER['REQUEST_METHOD'] != "POST") return;
+
+    /** list all methods */
+    $methods = get_class_methods($this);
+
+    /** search defined meta boxes */
+    foreach($methods as $i=>$method)
+    {
+      /** select meta box config method by pattern */
+      if(preg_match('/^_action_.+$/', $method))
+      {
+        $action = str_replace('-', '_', preg_replace('/_action_/', '', $method, 1)) ;
+        if($_POST['action'] == $action)
+        {
+          $this->$method();
+          exit;
+        }
+      }
+    }
   }
 }
