@@ -96,7 +96,7 @@ class DP_Helper_Gmaps
     $this->html->find('div', 0)->id = 'map_canvas';
 
     // instance API script
-    add_action( 'wp_footer', create_function($args, "wp_enqueue_script('google-maps');") );
+    add_action( 'wp_footer', create_function('', "wp_enqueue_script('google-maps');") );
     add_action( 'wp_footer', array($this, '_init_script') );
   }
 
@@ -126,7 +126,7 @@ class DP_Helper_Gmaps
   public function _init_script()
   { ?>
 <script type="text/javascript">
-jQuery(document).ready(function($)
+$(document).ready(function($)
 {
   var geocoder = new google.maps.Geocoder();
 
