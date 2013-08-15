@@ -38,6 +38,7 @@ class DP_Helper_Gmaps
   private $width;
   private $height;
   private $zoom;
+  private $scale;
 
   private $type;
   private $default_src;
@@ -53,6 +54,7 @@ class DP_Helper_Gmaps
     $this->width   = 600;
     $this->height  = 400;
     $this->zoom    = 15;
+    $this->scale   = 2;
     
     if( is_string($_params) )
       $_params = array('center' => $_params); /* ex: -25.495249,-49.288399 or 'Sao Paulo, SP' */
@@ -63,6 +65,7 @@ class DP_Helper_Gmaps
     $this->width    = isset($_params['w']) ? $_params['w'] : $this->width;
     $this->height   = isset($_params['h']) ? $_params['h'] : $this->height;
     $this->zoom     = isset($_params['z']) ? $_params['z'] : $this->zoom;
+    $this->scale    = isset($_params['scale']) ? $_params['scale'] : $this->scale;
 
     $this->default_src = 'http://maps.google.com/maps';
     $this->static_src  = 'http://maps.googleapis.com/maps/api/staticmap';
@@ -107,7 +110,7 @@ class DP_Helper_Gmaps
       $this->html->find('img', 0)->id = $this->attr['id'];
 
     // build img src
-    $request = "?center={$this->center}&zoom={$this->zoom}&size={$this->width}x{$this->height}&markers=color:red|{$this->center}&sensor=false&scale=4";
+    $request = "?center={$this->center}&zoom={$this->zoom}&size={$this->width}x{$this->height}&markers=color:red|{$this->center}&sensor=false&scale={$this->scale}";
     $this->html->find('img', 0)->src = $this->static_src . $request;
 
     // set alt text
