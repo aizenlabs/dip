@@ -22,9 +22,15 @@ abstract class DP_UserRole
     $this->init();
 
     /** call WordPress hooks */
-    add_action('switch_theme', array($this, 'add_user_role'));
-    add_action('after_switch_theme', array($this, 'remove_user_role'));
+    add_action('after_switch_theme', array($this, 'add_user_role'));
+    add_action('switch_theme', array($this, 'remove_user_role'));
   }
+
+  /**
+   * Abstract method to configure the user role
+   * @return void
+   */
+  abstract public function init();
 
   /**
    * Hooked method to register the new User Role
