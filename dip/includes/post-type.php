@@ -65,7 +65,7 @@ abstract class DP_PostType
 
     /** don't call next hooks outside of wp-admin */
     if(!is_admin()) return;
-    $is_edit = $_GET['post_type'] == $this->post_type;
+    $is_edit = (isset($_GET['post_type']) && $_GET['post_type'] == $this->post_type) ? true : false;
 
     /** customize post-type admin icon */
     if(!empty($this->icon))
