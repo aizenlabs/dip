@@ -16,10 +16,11 @@ abstract class DP_PostType
   public $icon;
   public $slug;
 
+  public $parent;
+
   public $labels = array();
   public $args   = array();
 
-  public $nonce_field = null;
   public $custom_fields;
 
   public $bp_register = false;
@@ -44,6 +45,7 @@ abstract class DP_PostType
 
     /** don't call this hooks outside of wp-admin */
     if(!is_admin()) return;
+    add_action('admin_menu', array($this, 'register_submenu'));
     add_action('add_meta_boxes', array($this, 'add_meta_boxes'));
     add_action('save_post', array($this, 'save_meta_data'));
   }
@@ -124,7 +126,7 @@ abstract class DP_PostType
       'public'             => true,
       'publicly_queryable' => true,
       'show_ui'            => true, 
-      'show_in_menu'       => true, 
+      'show_in_menu'       => empty($this->parent) ? true : false, 
       'query_var'          => true,
       'capability_type'    => 'post',
       'has_archive'        => true, 
@@ -137,6 +139,19 @@ abstract class DP_PostType
 
     /** apply custom args */
     $this->args = array_replace($defaults, (array)$this->args);
+  }
+  
+  /**
+   * Automatic list and register defined meta boxes
+   * To save the fields, is required register in the custom_fields attribute
+   * @return void
+   * @since 1.1.0
+   */
+  public function register_submenu()
+  {
+    /** create a submenu link if the post-type have a parent */
+    if(!empty($this->parent))
+      add_submenu_page($this->parent, $this->name, $this->name, $this->args['capability_type'], 'edit.php?post_type='.$this->post_type);
   }
 
   /**
@@ -165,7 +180,7 @@ abstract class DP_PostType
 
     /** add nonce after registered meta box */
     global $nonce;
-    $nonce = $this->nonce_field = wp_nonce_field($this->slug, 'nonce_'.$this->post_type, true, false);
+    $nonce = wp_nonce_field($this->slug, 'nonce_'.$this->post_type, true, false);
 
     /** hook function to print nonce field */
     add_action('edit_form_advanced', create_function('$post', 'global $nonce; echo $nonce;'));
