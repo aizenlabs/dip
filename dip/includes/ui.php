@@ -48,7 +48,7 @@ class DP_UserInterface
     if(array_key_exists($icon, $this->json->default_icons))
     {
       $icon_position  = $this->json->default_icons->$icon;
-      $this->styles[] = '#icon-'.$id.' { background-position: '.$icon_position->full.'; }';
+      $this->styles[] = '#icon-'.$id.' { background-position: '.$icon_position->full.' !important; }';
     }
     elseif(array_key_exists($icon, $this->json->custom_icons))
     {
