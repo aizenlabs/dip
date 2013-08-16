@@ -65,7 +65,7 @@ abstract class DP_PostType
 
     /** don't call next hooks outside of wp-admin */
     if(!is_admin()) return;
-    $is_edit = strpos($_SERVER["REQUEST_URI"], 'post_type=article');
+    $is_edit = strpos($_SERVER["REQUEST_URI"], 'post_type='.$this->post_type);
 
     /** customize post-type admin icon */
     if(!empty($this->icon))
