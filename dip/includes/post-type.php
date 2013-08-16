@@ -80,10 +80,6 @@ abstract class DP_PostType
     /** if is setted, customize title placeholder */
     if(isset($this->args['title_placeholder']) && $is_edit)
       add_filter('enter_title_here', array($this, '_filter_title_placeholder'), 10, 2);
-
-    /** option to remove the slug metabox */
-    if(isset($this->args['no_slug_meta_box']) && $is_edit)
-      add_action('admin_head', array($this, '_remove_slug_meta_box'));
   }
 
   /**
@@ -97,7 +93,7 @@ abstract class DP_PostType
     $defaults = array(
       'name'               => $this->name,
       'singular_name'      => $this->singular_name,
-      'add_new_item'       => sprintf(__('Add New %1$s', 'dip'), $this->singular_name),
+      'add_new_item'       => sprintf(__('Add new %1$s', 'dip'), $this->singular_name),
       'edit_item'          => sprintf(__('Edit %1$s', 'dip'), $this->singular_name),
       'new_item'           => sprintf(__('New %1$s', 'dip'), $this->singular_name),
       'all_items'          => sprintf(__('All %1$s', 'dip'), $this->name),
@@ -233,28 +229,6 @@ abstract class DP_PostType
   public function _filter_title_placeholder()
   {
     return $this->args['title_placeholder'];
-  }
-
-  /**
-   * Method used to remove slug meta box and print css rules to hidden it
-   * @return void
-   */
-  public function _remove_slug_meta_box()
-  {
-    global $post, $pagenow;
-
-    if(is_admin() && get_post_type() == $this->post_type && ($pagenow=='post-new.php' OR $pagenow=='post.php'))
-    {
-      remove_meta_box('slugdiv', $this->post_type, 'advanced');
-
-      /** print script and style to hide the meta box */
-      echo "<style>#edit-slug-box{display:none;}</style>";
-      echo "<script type='text/javascript'>
-              jQuery(document).ready(function($) {
-                jQuery('#edit-slug-box').remove();
-              });
-            </script>";
-    }
   }
 
   /**
