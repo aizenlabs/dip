@@ -2,8 +2,8 @@
   "default_icons":{
     "dashboard": {
       "full": "-137px -5px",
-      "menu": "-59px -33px",
-      "hover": "-59px -1px"
+      "menu": "-59px -34px",
+      "hover": "-59px -2px"
     },
     "posts": {
       "full": "-552px -5px",
@@ -16,14 +16,14 @@
       "hover": "-119px -1px"
     },
     "links": {
-      "full": "-492px -5px",
-      "menu": "-239px -33px",
-      "hover": "-239px -1px"
+      "full": "-190px -5px",
+      "menu": "-88px -33px",
+      "hover": "-88px -1px"
     },
     "pages": {
       "full": "-312px -5px",
-      "menu": "-149px -33px",
-      "hover": "-149px -1px"
+      "menu": "-150px -33px",
+      "hover": "-150px -1px"
     },
     "comments": {
       "full": "-72px -5px",
@@ -32,8 +32,8 @@
     },
     "themes": {
       "full": "-11px -5px",
-      "menu": "1px -33px",
-      "hover": "1px -1px"
+      "menu": "1px -34px",
+      "hover": "1px -2px"
     },
     "plugins": {
       "full": "-370px -5px",
@@ -42,8 +42,8 @@
     },
     "users": {
       "full": "-600px -5px",
-      "menu": "-300px -33px",
-      "hover": "-300px -1px"
+      "menu": "-300px -34px",
+      "hover": "-300px -2px"
     },
     "tools": {
       "full": "-432px -5px",
@@ -52,18 +52,18 @@
     },
     "general": {
       "full": "-492px -5px",
-      "menu": "-239px -33px",
-      "hover": "-239px -1px"
+      "menu": "-239px -34px",
+      "hover": "-239px -2px"
     },
     "keys": {
-      "full": "-492px -5px",
-      "menu": "-239px -33px",
-      "hover": "-239px -1px"
+      "full": "-659px -5px",
+      "menu": "-361px -34px",
+      "hover": "-361px -2px"
     },
     "options": {
-      "full": "-492px -5px",
-      "menu": "-239px -33px",
-      "hover": "-239px -1px"
+      "full": "-708px -5px",
+      "menu": "-329px -33px",
+      "hover": "-329px -1px"
     }
   },
   "custom_icons":{
@@ -74,8 +74,8 @@
     },
     "star": {
       "full": "-29px -98px",
-      "menu": "-31px -273px",
-      "hover": "-31px -305px"
+      "menu": "-31px -274px",
+      "hover": "-31px -306px"
     },
     "mobile": {
       "full": "-82px -31px",
@@ -83,39 +83,39 @@
       "hover": "-86px -207px"
     },
     "clipboard": {
-      "full": "-82px -96px",
-      "menu": "-87px -273px",
-      "hover": "-87px -305px"
+      "full": "-82px -98px",
+      "menu": "-85px -273px",
+      "hover": "-86px -305px"
     },
     "bookmark": {
       "full": "-139px -30px",
-      "menu": "-144px -175px",
-      "hover": "-144px -207px"
+      "menu": "-143px -175px",
+      "hover": "-143px -207px"
     },
     "box": {
-      "full": "-139px -96px",
-      "menu": "-144px -273px",
-      "hover": "-144px -305px"
+      "full": "-138px -96px",
+      "menu": "-142px -273px",
+      "hover": "-142px -305px"
     },
     "locationpin": {
       "full": "-196px -30px",
-      "menu": "-199px -175px",
-      "hover": "-199px -207px"
+      "menu": "-198px -175px",
+      "hover": "-198px -207px"
     },
     "calendar": {
-      "full": "-196px -96px",
+      "full": "-195px -96px",
       "menu": "-199px -273px",
       "hover": "-199px -305px"
     },
     "jamjar": {
       "full": "-251px -30px",
-      "menu": "-256px -175px",
-      "hover": "-256px -207px"
+      "menu": "-255px -176px",
+      "hover": "-255px -208px"
     },
     "buddy": {
       "full": "-251px -96px",
-      "menu": "-256px -273px",
-      "hover": "-256px -305px"
+      "menu": "-255px -273px",
+      "hover": "-255px -305px"
     },
     "pound": {
       "full": "-308px -30px",
@@ -124,8 +124,8 @@
     },
     "magazine": {
       "full": "-308px -96px",
-      "menu": "-312px -273px",
-      "hover": "-312px -305px"
+      "menu": "-311px -273px",
+      "hover": "-311px -305px"
     },
     "folder": {
       "full": "-365px -30px",
@@ -134,8 +134,8 @@
     },
     "book": {
       "full": "-365px -96px",
-      "menu": "-369px -273px",
-      "hover": "-369px -305px"
+      "menu": "-368px -273px",
+      "hover": "-368px -305px"
     },
     "rectangles": {
       "full": "-422px -30px",
@@ -149,8 +149,8 @@
     },
     "mortarboard": {
       "full": "-478px -30px",
-      "menu": "-480px -175px",
-      "hover": "-480px -207px"
+      "menu": "-479px -175px",
+      "hover": "-479px -207px"
     }
   }
 }

@@ -65,7 +65,7 @@ abstract class DP_PostType
 
     /** don't call next hooks outside of wp-admin */
     if(!is_admin()) return;
-    $is_edit = strpos($_SERVER["REQUEST_URI"], 'post_type=article');
+    $is_edit = (isset($_GET['post_type']) && $_GET['post_type'] == $this->post_type) ? true : false;
 
     /** customize post-type admin icon */
     if(!empty($this->icon))
@@ -178,7 +178,7 @@ abstract class DP_PostType
    */
   public function save_meta_data($post_id)
   {
-    if(!$this->_validate($post_id, $_POST['nonce_'.$this->post_type]))
+    if($_REQUEST != 'POST' || !$this->_validate($post_id, $_POST['nonce_'.$this->post_type]))
       return;
 
     foreach($this->custom_fields as $field)
