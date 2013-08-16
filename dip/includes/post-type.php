@@ -178,7 +178,7 @@ abstract class DP_PostType
    */
   public function save_meta_data($post_id)
   {
-    if(!$this->_validate($post_id, $_POST['nonce_'.$this->post_type]))
+    if($_REQUEST != 'POST' || !$this->_validate($post_id, $_POST['nonce_'.$this->post_type]))
       return;
 
     foreach($this->custom_fields as $field)
