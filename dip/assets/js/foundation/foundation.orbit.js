@@ -248,7 +248,7 @@
         .on('touchend.fndtn.orbit', function(e) {
           container.data('swipe-transition', {});
           e.stopPropagation();
-        })
+        });
       }
       container.on('mouseenter.fndtn.orbit', function(e) {
         if (settings.timer && settings.pause_on_hover) {
