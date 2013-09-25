@@ -46,7 +46,15 @@ class DP_Foundation
   
   public function _load_jslib()
   {
-    global $dip; ?>
+    global $dip;
+
+    if ($dip->modules['foundation']['lib'] == 'jQuery') :
+      echo "<script src=\"{$dip->theme->template_directory_uri}/assets/js/vendor/jquery.js\"></script>";
+
+    elseif ($dip->modules['foundation']['lib'] == 'Zepto') :
+      echo "<script src=\"{$dip->theme->template_directory_uri}/assets/js/vendor/zepto.js\"></script>";
+
+    else : ?>
     <script>
       <!-- Check for Zepto support, load jQuery if necessary -->
       document.write('<script src=<? echo $dip->theme->template_directory_uri ?>/assets/js/vendor/'
@@ -54,5 +62,6 @@ class DP_Foundation
         + '.js><\/script>');
     </script>
 <?php
+    endif;
   }
 }
