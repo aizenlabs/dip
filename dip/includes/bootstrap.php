@@ -153,7 +153,7 @@ class DP_Bootstrap
   {
     wp_register_style('dip', $this->theme->stylesheet_uri, false, $this->theme->version);
 
-    if(is_child_theme() && file_exists($this->theme->stylesheet_directory_uri.'/script.js'))
+    if(is_child_theme() && file_exists($this->theme->theme_root.'/'.$this->theme->stylesheet.'/script.js'))
       wp_register_script('dip', $this->theme->stylesheet_directory_uri.'/script.js', false, $this->theme->version, true);
     elseif(is_child_theme())
       wp_register_script('dip', $this->theme->template_directory_uri.'/script.js', false, $this->theme->parent()->version, true);
