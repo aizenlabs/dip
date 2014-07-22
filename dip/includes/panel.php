@@ -47,7 +47,6 @@ abstract class DP_Panel
     
     /** customize wp-admin icons for the new panel */
     global $dip;
-    $dip->ui->set_icon32($this->namespace, $this->icon);
     if($this->parent==false) $dip->ui->set_menu_icon('toplevel_page_'.$this->namespace, $this->icon);
 
     /** only if is a form submit */

@@ -4,6 +4,7 @@
  *
  * @package Dip Framework
  * @subpackage Admin User Interface
+ * @version 1.1.0
  * @since Dip Framework 1.0
  */
 
@@ -40,42 +41,15 @@ class DP_UserInterface
     echo '</style>';
   }
 
-  public function set_icon32($id, $icon)
-  {
-    global $post_type;
-
-    /** get sprite icon position */
-    if(array_key_exists($icon, $this->json->default_icons))
-    {
-      $icon_position  = $this->json->default_icons->$icon;
-      $this->styles[] = '#icon-'.$id.' { background-position: '.$icon_position->full.' !important; }';
-    }
-    elseif(array_key_exists($icon, $this->json->custom_icons))
-    {
-      $icon_position  = $this->json->custom_icons->$icon;
-      $icon_url       = get_bloginfo('template_url').'/assets/images/admin/icons.png';
-      $this->styles[] = '#icon-'.$id.' { background: transparent url('.$icon_url.') no-repeat '.$icon_position->full.' !important; }';
-    }
-  }
-
   public function set_menu_icon($id, $icon)
   {
-    if(array_key_exists($icon, $this->json->default_icons))
+    if(array_key_exists($icon, $this->json->dashicons))
     {
-      $icon_position  = $this->json->default_icons->$icon;
-      $this->styles[] = '#adminmenu #'.$id.' div.wp-menu-image { background-position: '.$icon_position->menu.'; }';
-      $this->styles[] = '#adminmenu #'.$id.'.current div.wp-menu-image,';
-      $this->styles[] = '#adminmenu #'.$id.'.wp-has-current-submenu div.wp-menu-image,';
-      $this->styles[] = '#adminmenu #'.$id.':hover div.wp-menu-image { background-position: '.$icon_position->hover.'; }';
+      $this->styles[] = '#adminmenu #'.$id.' div.wp-menu-image:before { content: "'.$this->json->dashicons->$icon.'"; }';
     }
-    elseif(array_key_exists($icon, $this->json->custom_icons))
+    else
     {
-      $icon_position  = $this->json->custom_icons->$icon;
-      $icon_url       = get_bloginfo('template_url').'/assets/images/admin/icons.png';
-      $this->styles[] = '#adminmenu #'.$id.' div.wp-menu-image { background: transparent url('.$icon_url.') no-repeat scroll '.$icon_position->menu.'; }';
-      $this->styles[] = '#adminmenu #'.$id.'.current div.wp-menu-image,';
-      $this->styles[] = '#adminmenu #'.$id.'.wp-has-current-submenu div.wp-menu-image,';
-      $this->styles[] = '#adminmenu #'.$id.':hover div.wp-menu-image { background: transparent url('.$icon_url.') no-repeat scroll '.$icon_position->hover.'; }';
+      $this->styles[] = '#adminmenu #'.$id.' div.wp-menu-image:before { content: "\f111"; }';
     }
   }
 }

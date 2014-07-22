@@ -1,6 +1,6 @@
 <?php
 /**
- * Abstract Class to Create new Post-Types
+ * Abstract Class to Create new Custom Post-Types
  *
  * @package Dip Framework
  * @subpackage Module Helpers
